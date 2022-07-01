@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "xQS6NiNL32wpfN5krquLJQb5uBlCPQLTst2wd3zmZmKuR8DVUercfh1rtMiuuO3hramcWNkEPTCS7cJlP/oOOg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ranas\\RiderProjects\\softwareProject-webApi\\AuthService\\AuthService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ranas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

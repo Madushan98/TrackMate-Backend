@@ -1,6 +1,9 @@
 using AuthService.Contract;
+using AuthService.Domain.Filters;
+using AuthService.Models.Request.Queries;
 using AuthService.Services;
 using AutoMapper;
+using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +20,29 @@ public class UserController : Controller
         _mapper = mapper;
     }
 
-
     [HttpPost(ApiRoutes.User.Create)]
     [ProducesResponseType(typeof(UserResponse), 200)]
     public async Task<IActionResult> CreateAsync([FromBody] UserRequest userRequest)
     {
-        var created = await _service.CreateUserAsync(userRequest);
+        var response = await _service.CreateUserAsync(userRequest);
 
-        if (created == null) return BadRequest();
+        if (response == null) return BadRequest();
 
-        return Accepted(created);
+        return Accepted(response);
     }
+    
+    [HttpGet(ApiRoutes.User.GetAll)]
+    public async Task<IActionResult> GetAllAsync([FromQuery] GetAllUserQuery query,
+        [FromQuery] PaginationRequest paginationRequest)
+    {
+        var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
+        var filter = _mapper.Map<UserFilter>(query);
+        var resonse = await _service.GetAllUsersAsync(filter, paginationFilter);
+
+        if (resonse== null) return BadRequest();
+
+        return Accepted(resonse);
+    }
+    
+    
 }

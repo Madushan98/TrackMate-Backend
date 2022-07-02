@@ -31,4 +31,8 @@
       <ProjectReference Include="..\DAOLibrary\DAOLibrary.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers" />
+    </ItemGroup>
+
 </Project>

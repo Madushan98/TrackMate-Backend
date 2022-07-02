@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using AuthService.Domain.Filters;
 using AutoMapper;
 using BaseService.DataContext;
 using DAOLIbrary.User;
+using DTOLibrary.Common;
+using DTOLibrary.Helpers;
 using DTOLibrary.UserDto;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,11 +23,36 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
+    public async Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter,
+        PaginationFilter pagination)
+    {
+        var queryable = _context.Users.AsNoTracking();
+
+        queryable = AddFilterOnQuery(filter, queryable);
+
+        var pagedResponse = await PagedResponse<User>.ToPagedList(queryable, pagination);
+        return MappingHelper.MapPagination<UserResponse, User>(pagedResponse, _mapper);
+    }
+
+    private IQueryable<User> AddFilterOnQuery(UserFilter filter, IQueryable<User> queryable)
+    {
+        if (Guid.Empty != filter?.UserId)
+        {
+            queryable = queryable.Where(user => user.UserId == filter.UserId);
+        }
+
+        if (!string.IsNullOrEmpty(filter?.NationalId))
+        {
+            queryable = queryable.Where(user => user.NationalId.StartsWith(filter.NationalId));
+        }
+
+        return queryable;
+    }
+
     public async Task<UserResponse> CreateUserAsync(UserRequest userRequest)
     {
         if (await GetUserByNationIdAsync(userRequest.NationalId) != null)
             throw new ValidationException("User With Same NationalCardId Already Exists");
-
 
         var user = _mapper.Map<User>(userRequest);
         // user.UserRoles = new List<UserRoleUser>();

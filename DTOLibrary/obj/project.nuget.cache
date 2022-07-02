@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "TZsu1nNqd94m7WJsPPlYgxbDdX6JfDsERnR3d3x4uHzdQdZ4S66e5mDFkbYD5molr1dNk5ZK6y+wIgljn8slxg==",
+  "dgSpecHash": "dELrzxnBckfRCDD1JGBv+syBtT0dN8/wvfWVk9bFjRkUlhumb+Yc87GsNRrzKCSRHsdBsEUVWpANHXtwgSipkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ranas\\RiderProjects\\softwareProject-webApi\\DTOLibrary\\DTOLibrary.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.apigatewayevents\\2.4.0\\amazon.lambda.apigatewayevents.2.4.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.applicationloadbalancerevents\\2.1.0\\amazon.lambda.applicationloadbalancerevents.2.1.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.aspnetcoreserver\\7.1.0\\amazon.lambda.aspnetcoreserver.7.1.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.core\\2.1.0\\amazon.lambda.core.2.1.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.logging.aspnetcore\\3.1.0\\amazon.lambda.logging.aspnetcore.3.1.0.nupkg.sha512",
+    "C:\\Users\\ranas\\.nuget\\packages\\amazon.lambda.serialization.systemtextjson\\2.2.0\\amazon.lambda.serialization.systemtextjson.2.2.0.nupkg.sha512",
     "C:\\Users\\ranas\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\ranas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\ranas\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -1,5 +1,8 @@
+using AuthService.Domain.Filters;
+using AuthService.Models.Request.Queries;
 using AutoMapper;
 using DAOLIbrary.User;
+using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 
 namespace AuthService.Mapper;
@@ -10,5 +13,7 @@ public class UserProfile : Profile
     {
         CreateMap<User, UserRequest>().ReverseMap();
         CreateMap<User, UserResponse>().ReverseMap();
+        CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
+        CreateMap<GetAllUserQuery, UserFilter>().ReverseMap();
     }
 }

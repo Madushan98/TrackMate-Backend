@@ -6,7 +6,7 @@ dotnet ef database update
 docker run -p 3306:3306 --name mysql1 -e MYSQL_ROOT_PASSWORD=password -d mysql:latest
 
 
-//remove DB changes and remove migration
+//remove DB changes and remove migration 
 dotnet ef database update 0
 dotnet ef migrations remove
 

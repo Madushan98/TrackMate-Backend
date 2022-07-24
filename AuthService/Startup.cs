@@ -1,6 +1,7 @@
 using AuthService.Services;
 using Base;
 using BaseService.DataContext;
+using BaseService.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthService
@@ -25,13 +26,13 @@ namespace AuthService
                         .AllowAnyHeader()
                 );
             });
-            
+
             // services.AddDbContext<AuthContext>(options =>
             // {
             //     options.UseMySql(Configuration.GetConnectionString("WorkflowDB"));
             // });
             string connectionString = EnvConstants.DbConnection;
-            
+
             // Replace with your server version and type.
             // Use 'MariaDbServerVersion' for MariaDB.
             // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
@@ -40,21 +41,23 @@ namespace AuthService
 
             // Replace 'YourDbContext' with the name of your own DbContext derived class.
             services.AddDbContext<DBContext>(
-                    dbContextOptions => dbContextOptions
-                        .UseMySql(connectionString, serverVersion,
-                            builder =>
-                                builder.MigrationsAssembly(
-                                    "BaseService"))
-                        .EnableDetailedErrors());   // <-- with debugging (remove for production).
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion,
+                        builder =>
+                            builder.MigrationsAssembly(
+                                "BaseService"))
+                    .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
-            
+
             services.AddAutoMapper(typeof(Startup));
-            
+
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddScoped<IAuthService, Services.AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<ICryptoService, CryptoService>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
             services.AddHttpContextAccessor();
@@ -63,7 +66,6 @@ namespace AuthService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -71,11 +73,11 @@ namespace AuthService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
                 c.RoutePrefix = string.Empty;
             });
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
+
             app.UseCors("CorsPolicy");
             app.UseAuthorization();
 

@@ -22,15 +22,14 @@ public class UserController : Controller
 
     [HttpPost(ApiRoutes.User.Create)]
     [ProducesResponseType(typeof(UserResponse), 200)]
-    public async Task<IActionResult> CreateAsync([FromBody] UserRequest userRequest)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest createUserRequest)
     {
-        var response = await _service.CreateUserAsync(userRequest);
-
+        var response = await _service.CreateUserAsync(createUserRequest);
         if (response == null) return BadRequest();
 
         return Accepted(response);
     }
-    
+
     [HttpGet(ApiRoutes.User.GetAll)]
     public async Task<IActionResult> GetAllAsync([FromQuery] GetAllUserQuery query,
         [FromQuery] PaginationRequest paginationRequest)
@@ -38,11 +37,8 @@ public class UserController : Controller
         var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
         var filter = _mapper.Map<UserFilter>(query);
         var resonse = await _service.GetAllUsersAsync(filter, paginationFilter);
-
-        if (resonse== null) return BadRequest();
+        if (resonse == null) return BadRequest();
 
         return Accepted(resonse);
     }
-    
-    
 }

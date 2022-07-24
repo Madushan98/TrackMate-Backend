@@ -80,25 +80,6 @@ public class UserService : IUserService
         return userResponse;
     }
 
-    // private void MapRolesAndPermissionsForResponse(UserResponse userResponse, User dao)
-    // {
-    //    // userResponse.Roles = dao.UserRoles != null ? dao.UserRoles.Select(user => user.UserRoleId.ToString()).ToList() : new List<string>();
-    //
-    //     var permissions = new HashSet<int>();
-    //     // if (dao.UserRoles != null)
-    //     // {
-    //     //     foreach (var userRole in dao.UserRoles)
-    //     //     {
-    //     //         var list = _context.UserRolePermissions.Where(permission => permission.UserRoleId == userRole.UserRoleId).Select(permission => permission.PermissionId).ToList();
-    //     //         foreach (var i in list)
-    //     //         {
-    //     //             permissions.Add(i);
-    //     //         }
-    //     //     }
-    //     // }
-    //
-    //     userResponse.Permissions = permissions;
-    // }
 
     private async Task<User> GetUserDaoByIdAsync(Guid userId)
     {
@@ -123,8 +104,7 @@ public class UserService : IUserService
             Console.WriteLine("GetUserByUsernameAsync Exception " + e.Message);
             Console.WriteLine("GetUserByUsernameAsync Exception " + e);
         }
-
-
+        
         Console.WriteLine("GetUserByUsernameAsync Result " + firstOrDefaultAsync?.NationalId);
         return firstOrDefaultAsync;
     }

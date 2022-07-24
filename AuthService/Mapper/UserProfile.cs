@@ -11,7 +11,7 @@ public class UserProfile : Profile
 {
     public UserProfile()
     {
-        CreateMap<User, UserRequest>().ReverseMap();
+        CreateMap<User, CreateUserRequest>().ReverseMap();
         CreateMap<User, UserResponse>().ReverseMap();
         CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
         CreateMap<GetAllUserQuery, UserFilter>().ReverseMap();

@@ -7,6 +7,6 @@ namespace AuthService.Services;
 public interface IUserService
 {
     Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter, PaginationFilter paginationFilter);
-    Task<UserResponse> CreateUserAsync(UserRequest userRequest);
+    Task<UserResponse> CreateUserAsync(CreateUserRequest createUserRequest);
 
 }

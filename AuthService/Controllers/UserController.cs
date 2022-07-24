@@ -22,9 +22,9 @@ public class UserController : Controller
 
     [HttpPost(ApiRoutes.User.Create)]
     [ProducesResponseType(typeof(UserResponse), 200)]
-    public async Task<IActionResult> CreateAsync([FromBody] UserRequest userRequest)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest createUserRequest)
     {
-        var response = await _service.CreateUserAsync(userRequest);
+        var response = await _service.CreateUserAsync(createUserRequest);
         if (response == null) return BadRequest();
 
         return Accepted(response);

@@ -17,6 +17,13 @@ public class ApiRoutes
         public const string ResetPassword = Base + "/User/resetPassword";
         public const string UserId = "{userId}";
     }
+    
+    public static class Auth
+    {
+        public const string RegisterUser = Base + "/register";
+        public const string LoginUser = Base + "/login";
+    }
+
 
     public static class Permission
     {

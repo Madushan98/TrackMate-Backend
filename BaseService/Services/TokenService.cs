@@ -19,7 +19,7 @@ public class TokenService : ITokenService
     public TokenService()
     {
         _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes("Haraka");
+        var key = Encoding.ASCII.GetBytes("this is my custom Secret key for authentication");
         _symmetricSecurityKey = new SymmetricSecurityKey(key);
     }
     

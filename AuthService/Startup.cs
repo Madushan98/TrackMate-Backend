@@ -58,6 +58,8 @@ namespace AuthService
             services.AddScoped<IAuthService, Services.AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<ICryptoService, CryptoService>();
+            services.AddSingleton<ICryptoService, CryptoService>();
+            services.AddSingleton<ITokenService, TokenService>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
             services.AddHttpContextAccessor();

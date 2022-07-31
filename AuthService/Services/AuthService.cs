@@ -47,9 +47,9 @@ public class AuthService : IAuthService
         return _mapper.Map<UserResponse>(userDao);
     }
 
-    public async Task<LoginResponse> LoginUserAsync(CreateUserRequest createUserRequest)
+    public async Task<LoginResponse> LoginUserAsync(LoginRequest loginRequest)
     {
-        var userDao = await GetUserByNationIdAsync(createUserRequest.NationalId);
+        var userDao = await GetUserByNationIdAsync(loginRequest.NationalId);
         if (userDao == null)
         {
             throw new NotFoundException(CommonExceptions.UserNotFound);
@@ -57,7 +57,7 @@ public class AuthService : IAuthService
 
         var decryptPassword = _cryptoService.Decrypt(userDao.Password, userDao.Key, userDao.Iv);
 
-        if (createUserRequest.Password != decryptPassword)
+        if (loginRequest.Password != decryptPassword)
         {
             throw new NotFoundException(CommonExceptions.UserPasswordMisMatch);
         }

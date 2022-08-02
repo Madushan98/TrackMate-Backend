@@ -1,5 +1,6 @@
 
 using Base.InitData.Users;
+using DAOLibrary.Pass;
 using DAOLIbrary.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ public class DBContext : DbContext
     }
     
     public DbSet<User> Users { get; set; }
+    public DbSet<PassDao> Passes { get; set; }
+    public DbSet<PassLogDao> PassLogs { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -2,6 +2,5 @@
 
 public static class EnvConstants
 {
-    public const string DbConnection =
-        "";
+    public const string DbConnection = "";
 }

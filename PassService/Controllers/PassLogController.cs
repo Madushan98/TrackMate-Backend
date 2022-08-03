@@ -21,7 +21,6 @@ public class PassLogController: Controller
     }
     
     [HttpPost(PassApiRoutes.PassLog.Create)]
-    [HttpPost(PassApiRoutes.Pass.Create)]
     public async Task<IActionResult> Create(CreatePassLogRequest createPassLogRequest)
     {
         var result = _mapper.Map<PassLogDao>(createPassLogRequest); 

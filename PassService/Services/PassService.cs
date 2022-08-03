@@ -27,37 +27,45 @@ public class PassService: IPassServices
 
 
     
-    public async Task<PagedResponse<PassResponse>> GetAllPass(PaginationFilter pagination)
+    public async Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination)
     {
         var queryable = _context.Passes.AsNoTracking();
         var pagedResponse = await PagedResponse<PassDao>.ToPagedList(queryable, pagination);
-        return MappingHelper.MapPagination<PassResponse, PassDao>(pagedResponse, _mapper);
+        return pagedResponse;
     }
 
-    
-    public async Task<PassResponse> CreatePass(PassDao pass)
+    public async Task<PassDao> GetPassById(Guid id)
+    {
+        var pass = await _context.Passes.FirstOrDefaultAsync(x => x.Id == id);
+        return pass;
+    }
+
+
+    public async Task<PassDao> CreatePass(PassDao pass)
     {
         _context.Passes.Add(pass);
         await _context.SaveChangesAsync();
-        return _mapper.Map<PassResponse>(pass);
+        return pass;
     }
 
-    public string CreatePassToke(string passId)
+    public string CreatePassToke(Guid passId)
     {
-        return _encryptService.EncryptPass(passId);
+        
+        return _encryptService.EncryptPass(passId.ToString());
     }
 
     public async Task<PassDao> GetScanData(string token)
     {
         var id = _encryptService.DecryptPass(token);
-        var Guid = System.Guid.Parse(id);
+        var guid = System.Guid.Parse(id);
+        Console.WriteLine(guid);
         var pass =await  _context.Passes
             .Include(dao=>dao.PassLogs)
             .ThenInclude(logDao=>logDao.Scanner)
             .Include(dao=>dao.ApprovedUser)
             .Include(dao=>dao.User)
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == Guid);;
+            .FirstOrDefaultAsync(x => x.Id == guid);
         return pass;
     }
 

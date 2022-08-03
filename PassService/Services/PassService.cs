@@ -25,7 +25,6 @@ public class PassService: IPassServices
         _encryptService = encryptService;
     }
 
-
     
     public async Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination)
     {
@@ -34,13 +33,23 @@ public class PassService: IPassServices
         return pagedResponse;
     }
 
-    public async Task<PassDao> GetPassById(Guid id)
+    public async Task<PassDao?> GetPassById(Guid id)
     {
-        var pass = await _context.Passes.FirstOrDefaultAsync(x => x.Id == id);
+        var pass = await _context.Passes.FirstOrDefaultAsync(pass => pass.Id == id);
         return pass;
     }
 
+    public async Task<bool> DeleteById(Guid id)
+    {
+        var pass = await _context.Passes
+            .FirstOrDefaultAsync(pass=>pass.Id == id);
 
+        _context.Passes.Remove(pass);
+        
+        var saveChangesAsync = await _context.SaveChangesAsync();
+        return saveChangesAsync > 0;
+    }
+    
     public async Task<PassDao> CreatePass(PassDao pass)
     {
         _context.Passes.Add(pass);
@@ -50,7 +59,6 @@ public class PassService: IPassServices
 
     public string CreatePassToke(Guid passId)
     {
-        
         return _encryptService.EncryptPass(passId.ToString());
     }
 
@@ -65,7 +73,7 @@ public class PassService: IPassServices
             .Include(dao=>dao.ApprovedUser)
             .Include(dao=>dao.User)
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == guid);
+            .FirstOrDefaultAsync(pass => pass.Id == guid);
         return pass;
     }
 

@@ -35,11 +35,11 @@ public class PassController: Controller
     }
     
     [HttpGet(PassApiRoutes.Pass.Get)]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<ActionResult<PassResponse>> Get(Guid id)
     {
-        
-        var response = await _service.GetPassById(id);
-        if (response == null) return BadRequest();
+        var pass = await _service.GetPassById(id);
+        if (pass == null) return NotFound();
+        var response = _mapper.Map<PassResponse>(pass);
 
         return Accepted(response);
     }
@@ -53,7 +53,25 @@ public class PassController: Controller
 
         return Accepted(response);
     }
-    
+
+    [HttpDelete(PassApiRoutes.Pass.Delete)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        bool exists = await _service.GetPassById(id) !=null;
+        if (!exists)
+        {
+            return NotFound();
+        }
+
+        bool updated = await _service.DeleteById(id);
+        if (updated)
+        {
+            return Ok();
+        }
+
+        return BadRequest();
+    }
+
     [HttpPost(PassApiRoutes.Pass.GetToken)]
     public async Task<IActionResult> GetToken(Guid createPassRequest)
     {
@@ -65,8 +83,8 @@ public class PassController: Controller
     [HttpPost(PassApiRoutes.Pass.VerifyToken)]
     public async Task<IActionResult> ScanToken(string createPassRequest)
     {
-        var pass =  _service.GetScanData(createPassRequest);
-        var response = _mapper.Map<PassResponse>(pass.Result);
+        var pass = await _service.GetScanData(createPassRequest);
+        var response = _mapper.Map<PassResponse>(pass);
         return Accepted(response);
     }
 }

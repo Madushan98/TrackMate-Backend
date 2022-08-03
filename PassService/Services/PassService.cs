@@ -47,9 +47,18 @@ public class PassService: IPassServices
         return _encryptService.EncryptPass(passId);
     }
 
-    public string VerifyPass(string token)
+    public async Task<PassDao> GetScanData(string token)
     {
-        return _encryptService.DecryptPass(token);
+        var id = _encryptService.DecryptPass(token);
+        var Guid = System.Guid.Parse(id);
+        var pass =await  _context.Passes
+            .Include(dao=>dao.PassLogs)
+            .ThenInclude(logDao=>logDao.Scanner)
+            .Include(dao=>dao.ApprovedUser)
+            .Include(dao=>dao.User)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == Guid);;
+        return pass;
     }
 
 }

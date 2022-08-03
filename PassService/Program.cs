@@ -1,6 +1,9 @@
 using Base;
 using BaseService.DataContext;
 using BaseService.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.EntityFrameworkCore;
 using PassService.Services;
 
@@ -24,7 +27,13 @@ builder.Services.AddDbContext<DBContext>(
 builder.Services.AddScoped<IPassServices,PassService.Services.PassService>();
 builder.Services.AddSingleton<ICryptoService, CryptoService>();
 builder.Services.AddSingleton<IPassEncryptService, PassEncryptService>();
-builder.Services.AddDataProtection();
+builder.Services.AddDataProtection().UseCryptographicAlgorithms(
+    new AuthenticatedEncryptorConfiguration
+        {
+            EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+            ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+        }
+    );;
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 

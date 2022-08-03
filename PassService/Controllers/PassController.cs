@@ -55,10 +55,10 @@ public class PassController: Controller
     }
     
     [HttpPost(PassApiRoutes.Pass.VerifyToken)]
-    public async Task<IActionResult> VerifyToken(string createPassRequest)
+    public async Task<IActionResult> ScanToken(string createPassRequest)
     {
-        var response =  _service.VerifyPass(createPassRequest);
-
+        var pass =  _service.GetScanData(createPassRequest);
+        var response = _mapper.Map<PassResponse>(pass.Result);
         return Accepted(response);
     }
 }

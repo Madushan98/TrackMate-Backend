@@ -10,7 +10,7 @@ using PassService.Services;
 
 namespace PassService.Controllers;
 
-[ApiController]
+
 public class PassController: Controller
 {
     private readonly IMapper _mapper;

@@ -35,6 +35,7 @@ builder.Services.AddDataProtection().UseCryptographicAlgorithms(
             ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
         }
     );;
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 

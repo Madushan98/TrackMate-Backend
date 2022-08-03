@@ -10,6 +10,8 @@ public class PassApiRoutes
     {
         public const string GetAll = Base + "/Pass";
         public const string Create = Base + "/Pass";
+        public const string GetToken = Base + "/Pass/GetToken";
+        public const string VerifyToken = Base + "/Pass/Verify";
         public const string Get = Base + "/Pass/" + PassId;
         public const string Update = Base + "/Pass/" + PassId;
         public const string Delete = Base + "/Pass/" + PassId;

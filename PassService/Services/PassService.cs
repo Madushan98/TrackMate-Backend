@@ -16,30 +16,40 @@ public class PassService: IPassServices
 {
     private readonly DBContext _context;
     private readonly IMapper _mapper;
+    private readonly IPassEncryptService _encryptService;
 
-
-    public PassService(DBContext context, IMapper mapper)
+    public PassService(DBContext context, IMapper mapper, IPassEncryptService encryptService)
     {
         _context = context;
         _mapper = mapper;
+        _encryptService = encryptService;
     }
 
 
-    [HttpGet(PassApiRoutes.Pass.GetAll)]
-    public async Task<PagedResponse<PassResponse>> Get(PaginationFilter pagination)
+    
+    public async Task<PagedResponse<PassResponse>> GetAllPass(PaginationFilter pagination)
     {
         var queryable = _context.Passes.AsNoTracking();
         var pagedResponse = await PagedResponse<PassDao>.ToPagedList(queryable, pagination);
         return MappingHelper.MapPagination<PassResponse, PassDao>(pagedResponse, _mapper);
     }
 
-    [HttpPost(PassApiRoutes.Pass.Create)]
-    public async Task<PassResponse> CreatePass(CreatePassRequest createPassRequest)
+    
+    public async Task<PassResponse> CreatePass(PassDao pass)
     {
-        var pass = _mapper.Map<PassDao>(createPassRequest);
         _context.Passes.Add(pass);
         await _context.SaveChangesAsync();
-
         return _mapper.Map<PassResponse>(pass);
     }
+
+    public string CreatePassToke(string passId)
+    {
+        return _encryptService.EncryptPass(passId);
+    }
+
+    public string VerifyPass(string token)
+    {
+        return _encryptService.DecryptPass(token);
+    }
+
 }

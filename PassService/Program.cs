@@ -25,6 +25,7 @@ builder.Services.AddDbContext<DBContext>(
                     "BaseService"))
         .EnableDetailedErrors());
 builder.Services.AddScoped<IPassServices,PassService.Services.PassService>();
+builder.Services.AddScoped<IPassLogService,PassLogService>();
 builder.Services.AddSingleton<ICryptoService, CryptoService>();
 builder.Services.AddSingleton<IPassEncryptService, PassEncryptService>();
 builder.Services.AddDataProtection().UseCryptographicAlgorithms(

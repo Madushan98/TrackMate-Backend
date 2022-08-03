@@ -17,4 +17,14 @@ public class PassApiRoutes
         public const string Delete = Base + "/Pass/" + PassId;
         public const string PassId = "{passId}";
     }
+    
+    public static class PassLog
+    {
+        public const string GetAll = Base + "/PassLog";
+        public const string Create = Base + "/PassLog";
+        public const string Get = Base + "/PassLog/" + PassId;
+        public const string Update = Base + "/PassLog/" + PassId;
+        public const string Delete = Base + "/PassLog/" + PassId;
+        public const string PassId = "{passLogId}";
+    }
 }

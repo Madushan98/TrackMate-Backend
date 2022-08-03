@@ -15,16 +15,11 @@ public class PassController: Controller
 {
     private readonly IMapper _mapper;
     private readonly IPassServices _service;
-    private readonly ICryptoService _cryptoService;
 
     public PassController(IPassServices service, IMapper mapper, ICryptoService cryptoService)
     {
         _service = service;
         _mapper = mapper;
-        _cryptoService = cryptoService;
-
-        var asd = _cryptoService.Encrypt("preminda");
-        Console.WriteLine(asd);
     }
 
     [HttpGet(PassApiRoutes.Pass.GetAll)]

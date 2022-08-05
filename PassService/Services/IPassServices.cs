@@ -10,7 +10,7 @@ namespace PassService.Services;
 public interface IPassServices
 {
     Task<PagedResponse<PassResponse>> GetAllPass(PassFilter filter, PaginationFilter pagination);
-    Task<PassResponse> CreatePass(PassDao passDao);
+    Task<PassResponse> CreatePass(CreatePassRequest passRequest);
     string CreatePassToke(string passId);
     public Task<PassDao> GetScanData(string token);
 

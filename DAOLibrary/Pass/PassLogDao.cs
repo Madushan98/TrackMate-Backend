@@ -1,4 +1,6 @@
-﻿using DAOLIbrary.User;
+﻿
+
+using DAOLibrary.User;
 
 namespace DAOLibrary.Pass;
 
@@ -10,7 +12,7 @@ public class PassLogDao
     public decimal Longitude { get; set; }
     
     public Guid ScannerId { get; set; }
-    public User Scanner { get; set; }
+    public UserDao Scanner { get; set; }
 
     public Guid PassDataId { get; set; }
     public virtual PassDao Pass { get; set; }

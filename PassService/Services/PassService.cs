@@ -2,7 +2,7 @@
 using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.Pass;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
@@ -49,11 +49,28 @@ public class PassService: IPassServices
     }
 
     
-    public async Task<PassResponse> CreatePass(PassDao pass)
+    public async Task<PassResponse> CreatePass(CreatePassRequest createPassRequest)
     {
-        _context.Passes.Add(pass);
-        await _context.SaveChangesAsync();
-        return _mapper.Map<PassResponse>(pass);
+        var user = GetUserByNationalIdAsync(createPassRequest.NationalId).Result;
+        if (user == null)
+        {
+            return null;
+        }
+     
+        var createPass = _mapper.Map<PassDao>(createPassRequest);
+        createPass.UserId = user.Id;
+        createPass.IsApproved = false;
+        createPass.IsValid = false;
+        createPass.GeneratedDateTime = DateTime.Now;
+
+        _context.Passes.Add(createPass);
+       var saveChanges =  await _context.SaveChangesAsync();
+       if (saveChanges > 0)
+       {
+           return _mapper.Map<PassResponse>(createPass);
+       }
+       
+       return null;
     }
 
     public string CreatePassToke(string passId)
@@ -67,12 +84,19 @@ public class PassService: IPassServices
         var Guid = System.Guid.Parse(id);
         var pass =await  _context.Passes
             .Include(dao=>dao.PassLogs)
-            .ThenInclude(logDao=>logDao.Scanner)
-            .Include(dao=>dao.ApprovedUser)
-            .Include(dao=>dao.UserPassDao)
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == Guid);;
         return pass;
     }
 
+    public async Task<UserDao?> GetUserByNationalIdAsync(string nationalId)
+    {
+        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId).AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (firstOrDefaultAsync == null)
+        {
+            
+        }
+        return firstOrDefaultAsync;
+    }
 }

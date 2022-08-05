@@ -2,7 +2,7 @@ using AuthService.Domain.Filters;
 using AuthService.Models.Request.Queries;
 using AutoMapper;
 using DAOLibrary.Pass;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.PassDto;
 using DTOLibrary.UserDto;

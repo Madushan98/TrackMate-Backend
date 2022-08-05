@@ -16,6 +16,7 @@ public class DBContext : DbContext
     public DbSet<PassDao> Passes { get; set; }
     public DbSet<PassLogDao> PassLogs { get; set; }
     
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

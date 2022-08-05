@@ -4,6 +4,7 @@ public class LoginResponse
 {
     public string NationalId { get; set; }
     
+    public string UserType { get; set; }
     public string Id { get; set; }
     public string Token { get; set; }
     public string RefreshToken { get; set; }

@@ -39,8 +39,8 @@ public class PassController: Controller
     [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> Create(CreatePassRequest createPassRequest)
     {
-        var result = _mapper.Map<PassDao>(createPassRequest); 
-        var response = await _service.CreatePass(result);
+     
+        var response = await _service.CreatePass(createPassRequest);
 
         return Accepted(response);
     }

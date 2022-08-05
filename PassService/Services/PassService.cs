@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using AuthService.Domain.Filters;
+using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.Pass;
 using DAOLIbrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
+using DTOLibrary.PassDto.Filters;
 using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +29,23 @@ public class PassService: IPassServices
 
 
     
-    public async Task<PagedResponse<PassResponse>> GetAllPass(PaginationFilter pagination)
+    public async Task<PagedResponse<PassResponse>> GetAllPass(PassFilter filter,PaginationFilter pagination)
     {
         var queryable = _context.Passes.AsNoTracking();
+        queryable = AddFilterOnQuery(filter, queryable);
         var pagedResponse = await PagedResponse<PassDao>.ToPagedList(queryable, pagination);
         return MappingHelper.MapPagination<PassResponse, PassDao>(pagedResponse, _mapper);
+    }
+    
+    private IQueryable<PassDao> AddFilterOnQuery(PassFilter filter, IQueryable<PassDao> queryable)
+    {
+        if (Guid.Empty != filter?.UserId)
+        {
+            queryable = queryable.Where(pass => pass.UserId == filter.UserId);
+        }
+        
+
+        return queryable;
     }
 
     
@@ -55,7 +69,7 @@ public class PassService: IPassServices
             .Include(dao=>dao.PassLogs)
             .ThenInclude(logDao=>logDao.Scanner)
             .Include(dao=>dao.ApprovedUser)
-            .Include(dao=>dao.User)
+            .Include(dao=>dao.UserPassDao)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == Guid);;
         return pass;

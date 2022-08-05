@@ -17,7 +17,8 @@ public class PassDao
     public DateTime EndDateTime { get; set; }
 
     public Guid UserId { get; set; }
-    public User User { get; set; }
+    
+    public UserPassDao? UserPassDao { get; set; }
     
     public Guid ApprovedUserId { get; set; }
     public User ApprovedUser { get; set; }

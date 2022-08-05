@@ -4,6 +4,7 @@ using BaseService.Services;
 using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.PassDto;
+using DTOLibrary.PassDto.Filters;
 using Microsoft.AspNetCore.Mvc;
 using PassService.ApiRoutes.V1;
 using PassService.Services;
@@ -23,16 +24,19 @@ public class PassController: Controller
     }
 
     [HttpGet(PassApiRoutes.Pass.GetAll)]
-    public async Task<IActionResult> Get([FromQuery] PaginationRequest paginationRequest)
+    [ProducesResponseType(typeof(PassResponse), 200)]
+    public async Task<IActionResult> Get([FromQuery] PassFilter query,[FromQuery] PaginationRequest paginationRequest)
     {
         var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
-        var response = await _service.GetAllPass(paginationFilter);
+        var filter = _mapper.Map<PassFilter>(query);
+        var response = await _service.GetAllPass(filter,paginationFilter);
         if (response == null) return BadRequest();
 
         return Accepted(response);
     }
     
     [HttpPost(PassApiRoutes.Pass.Create)]
+    [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> Create(CreatePassRequest createPassRequest)
     {
         var result = _mapper.Map<PassDao>(createPassRequest); 
@@ -42,6 +46,7 @@ public class PassController: Controller
     }
     
     [HttpPost(PassApiRoutes.Pass.GetToken)]
+    [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> GetToken(string createPassRequest)
     {
         var response =  _service.CreatePassToke(createPassRequest);
@@ -50,6 +55,7 @@ public class PassController: Controller
     }
     
     [HttpPost(PassApiRoutes.Pass.VerifyToken)]
+    [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> ScanToken(string createPassRequest)
     {
         var pass =  _service.GetScanData(createPassRequest);

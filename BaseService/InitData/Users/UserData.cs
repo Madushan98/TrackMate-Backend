@@ -20,6 +20,7 @@ public class UserData : BaseDataInit<User>
                 FirstName = "Admin",
                 LastName = "Admin",
                 IsVertified = true,
+                UserType = Constants.UserTypes[Constants.AdminUserRole],
                 Password = Pass,
                 Key = Key,
                 Iv = Iv

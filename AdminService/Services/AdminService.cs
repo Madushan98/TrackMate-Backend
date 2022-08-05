@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using AuthService.Domain.Filters;
 using AutoMapper;
 using BaseService.DataContext;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.UserDto;
@@ -29,17 +29,17 @@ public class UserService : IUserService
 
         queryable = AddFilterOnQuery(filter, queryable);
 
-        var pagedResponse = await PagedResponse<User>.ToPagedList(queryable, pagination);
-        return MappingHelper.MapPagination<UserResponse, User>(pagedResponse, _mapper);
+        var pagedResponse = await PagedResponse<UserDao>.ToPagedList(queryable, pagination);
+        return MappingHelper.MapPagination<UserResponse, UserDao>(pagedResponse, _mapper);
     }
     
 
 
-    private IQueryable<User> AddFilterOnQuery(UserFilter filter, IQueryable<User> queryable)
+    private IQueryable<UserDao> AddFilterOnQuery(UserFilter filter, IQueryable<UserDao> queryable)
     {
         if (Guid.Empty != filter?.UserId)
         {
-            queryable = queryable.Where(user => user.UserId == filter.UserId);
+            queryable = queryable.Where(user => user.Id == filter.UserId);
         }
 
         if (!string.IsNullOrEmpty(filter?.NationalId))
@@ -55,14 +55,14 @@ public class UserService : IUserService
         if (await GetUserByNationIdAsync(createUserRequest.NationalId) != null)
             throw new ValidationException("User With Same NationalCardId Already Exists");
 
-        var user = _mapper.Map<User>(createUserRequest);
+        var user = _mapper.Map<UserDao>(createUserRequest);
         
 
         var entityEntry = await _context.Users.AddAsync(user);
         var saveChangesAsync = await _context.SaveChangesAsync();
         if (saveChangesAsync > 0)
         {
-            var userByIdAsync = await GetUserByIdAsync(entityEntry.Entity.UserId);
+            var userByIdAsync = await GetUserByIdAsync(entityEntry.Entity.Id);
             return _mapper.Map<UserResponse>(userByIdAsync);
         }
 
@@ -81,7 +81,7 @@ public class UserService : IUserService
     {
         var userDao  = await  _context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.UserId == userId);
+            .FirstOrDefaultAsync(user => user.Id == userId);
 
         if (userDao == null)
         {
@@ -98,15 +98,15 @@ public class UserService : IUserService
  
 
 
-    private async Task<User?> GetUserDaoByIdAsync(Guid userId)
+    private async Task<UserDao?> GetUserDaoByIdAsync(Guid userId)
     {
         var user  = await  _context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.UserId == userId);
+            .FirstOrDefaultAsync(user => user.Id == userId);
         return user;
     }
 
-    public async Task<User?> GetUserByNationIdAsync(string nationalId)
+    public async Task<UserDao?> GetUserByNationIdAsync(string nationalId)
     {
        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId)
             .FirstOrDefaultAsync();

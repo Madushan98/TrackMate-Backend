@@ -17,7 +17,6 @@ builder.Services.AddDbContext<DBContext>(
                     "BaseService"))
         .EnableDetailedErrors());
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -1,5 +1,6 @@
 ﻿using AdminService.Services;
 using Base;
+using BaseService.Contract.Mappers;
 using BaseService.DataContext;
 using BaseService.Services;
 using Microsoft.EntityFrameworkCore;
@@ -49,12 +50,12 @@ public class Startup
                 .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
 
-        services.AddAutoMapper(typeof(Startup));
+        
 
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );
-
+        services.AddAutoMapper(typeof(Startup),typeof(CommonMapper));
         services.AddScoped<IUserService, UserService>();
         services.AddSingleton<ICryptoService, CryptoService>();
         services.AddSingleton<ICryptoService, CryptoService>();

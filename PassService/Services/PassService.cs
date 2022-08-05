@@ -2,7 +2,7 @@
 using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.Pass;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
@@ -58,7 +58,7 @@ public class PassService: IPassServices
         }
      
         var createPass = _mapper.Map<PassDao>(createPassRequest);
-        createPass.UserId = user.UserId;
+        createPass.UserId = user.Id;
         createPass.IsApproved = false;
         createPass.IsValid = false;
         createPass.GeneratedDateTime = DateTime.Now;
@@ -84,14 +84,11 @@ public class PassService: IPassServices
         var Guid = System.Guid.Parse(id);
         var pass =await  _context.Passes
             .Include(dao=>dao.PassLogs)
-            .ThenInclude(logDao=>logDao.Scanner)
-            .Include(dao=>dao.UserPassDao)
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == Guid);;
         return pass;
     }
 
-    public async Task<User?> GetUserByNationalIdAsync(string nationalId)
+    public async Task<UserDao?> GetUserByNationalIdAsync(string nationalId)
     {
         var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId).AsNoTracking()
             .FirstOrDefaultAsync();

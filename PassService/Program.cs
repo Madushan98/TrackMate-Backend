@@ -1,4 +1,5 @@
 using Base;
+using BaseService.Contract.Mappers;
 using BaseService.DataContext;
 using BaseService.Services;
 using Microsoft.AspNetCore.DataProtection;

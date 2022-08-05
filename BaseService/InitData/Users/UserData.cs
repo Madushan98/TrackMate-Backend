@@ -1,21 +1,21 @@
 ﻿using BaseService.Constants;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 
 namespace Base.InitData.Users;
 
-public class UserData : BaseDataInit<User>
+public class UserData : BaseDataInit<UserDao>
 {
     private const string Pass = "hUSqSs18RSXUGvqmpJ0Bvg==";
     private const string Key = "jXaTiycDZAwJJ5V0845dZzV42//c9aRiYDtixz/VzUc=";
     private const string Iv = "nRAnoIEBItu67NxD/ftlMg==";
 
-    public override List<User> Data()
+    public override List<UserDao> Data()
     {
-        return new List<User>()
+        return new List<UserDao>()
         {
-            new User()
+            new UserDao()
             {
-                UserId = Constants.AdminUserId,
+                Id = Constants.AdminUserId,
                 NationalId = Constants.AdminNationalId,
                 FirstName = "Admin",
                 LastName = "Admin",

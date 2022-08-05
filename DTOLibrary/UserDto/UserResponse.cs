@@ -2,7 +2,7 @@ namespace DTOLibrary.UserDto;
 
 public class UserResponse
 {
-    public Guid UserId { get; set; }
+    public Guid Id { get; set; }
     public string NationalId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }

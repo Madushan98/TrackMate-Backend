@@ -2,10 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using AuthService.Domain.Filters;
 using AutoMapper;
 using BaseService.DataContext;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Exceptions;
 using DTOLibrary.Helpers;
+using DTOLibrary.PassDto;
 using DTOLibrary.UserDto;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,15 +38,15 @@ public class UserService : IUserService
     }
 
 
-    private async Task<User?> GetUserDaoByIdAsync(Guid userId)
+    private async Task<UserDao?> GetUserDaoByIdAsync(Guid userId)
     {
         var user  = await  _context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.UserId == userId);
+            .FirstOrDefaultAsync(user => user.Id == userId);
         return user;
     }
 
-    public async Task<User?> GetUserByNationIdAsync(string nationalId)
+    public async Task<UserDao?> GetUserByNationIdAsync(string nationalId)
     {
        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId)
             .FirstOrDefaultAsync();
@@ -69,9 +70,9 @@ public class UserService : IUserService
             throw new BadHttpRequestException(CommonExceptions.UserNotFound.Message, 500); 
         }
         
-        var user =  _mapper.Map<User>(updateUserRequest);
+        var user =  _mapper.Map<UserDao>(updateUserRequest);
 
-        user.UserId = existUser.UserId;
+        user.Id = existUser.Id;
         user.IsVertified = existUser.IsVertified;
         user.Iv = existUser.Iv;
         user.Password = existUser.Password;
@@ -89,4 +90,11 @@ public class UserService : IUserService
         return userResponse;
 
     }
+
+    public Task<PagedResponse<PassResponse>> GetAllUsersAsync(UserFilter filter, PaginationFilter paginationFilter)
+    {
+        throw new NotImplementedException();
+    }
+
+   
 }

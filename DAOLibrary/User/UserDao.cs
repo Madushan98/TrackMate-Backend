@@ -1,10 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using DAOLibrary.Pass;
+using MessagePack;
 
-namespace DAOLIbrary.User;
+namespace DAOLibrary.User;
 
-public class User
+public class UserDao
 {
-    public Guid UserId { get; set; }
+    public Guid Id { get; set; }
     public string NationalId { get; set; } = null!;
     public string? FirstName { get; set; }
     public string? LastName { get; set; } 

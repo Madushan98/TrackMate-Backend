@@ -20,23 +20,21 @@ public class UserController : Controller
         _mapper = mapper;
     }
 
-    [HttpPost(ApiRoutes.User.Create)]
+    [HttpPost(ApiRoutes.User.Update)]
     [ProducesResponseType(typeof(UserResponse), 200)]
-    public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest createUserRequest)
+    public async Task<IActionResult> UpdateUser(string nationalId, [FromBody] UserUpdateRequest userUpdateRequest) 
     {
-        var response = await _service.CreateUserAsync(createUserRequest);
+        var response = await _service.UpdateUserAsync(nationalId,userUpdateRequest);
         if (response == null) return BadRequest();
 
         return Accepted(response);
     }
 
-    [HttpGet(ApiRoutes.User.GetAll)]
-    public async Task<IActionResult> GetAllAsync([FromQuery] GetAllUserQuery query,
-        [FromQuery] PaginationRequest paginationRequest)
+    [HttpGet(ApiRoutes.User.Get)]
+    public async Task<IActionResult> GetUserDetails(string nationalId)
     {
-        var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
-        var filter = _mapper.Map<UserFilter>(query);
-        var resonse = await _service.GetAllUsersAsync(filter, paginationFilter);
+      
+        var resonse = await _service.GetUserDetailsAsync(nationalId);
         if (resonse == null) return BadRequest();
 
         return Accepted(resonse);

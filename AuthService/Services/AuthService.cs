@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
+using BaseService.Constants;
 using BaseService.DataContext;
 using BaseService.Services;
 using DAOLIbrary.User;
@@ -8,6 +9,7 @@ using DTOLibrary.UserDto;
 using DTOLibrary.UserDto.Login;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
+using System.Net.Http;
 
 namespace AuthService.Services;
 
@@ -32,7 +34,7 @@ public class AuthService : IAuthService
 
         if (userExist != null)
         {
-            throw new BadRequestException(CommonExceptions.NationalIdAlreadyRegistered);
+            throw new BadHttpRequestException(CommonExceptions.NationalIdAlreadyRegistered.Message, 400);
         }
 
         var userDao = _mapper.Map<User>(createUserRequest);
@@ -41,6 +43,8 @@ public class AuthService : IAuthService
         userDao.Key = key;
         userDao.Iv = iv;
         userDao.IsVertified = false;
+        userDao.UserType = Constants.UserTypes[Constants.UserUserRole];
+
         var entityEntry = await _context.Users.AddAsync(userDao);
         var saveAsync = await _context.SaveChangesAsync();
 
@@ -52,14 +56,14 @@ public class AuthService : IAuthService
         var userDao = await GetUserByNationIdAsync(loginRequest.NationalId);
         if (userDao == null)
         {
-            throw new NotFoundException(CommonExceptions.UserNotFound);
+            throw new BadHttpRequestException(CommonExceptions.UserNotFound.Message, 400);
         }
 
         var decryptPassword = _cryptoService.Decrypt(userDao.Password, userDao.Key, userDao.Iv);
 
         if (loginRequest.Password != decryptPassword)
         {
-            throw new NotFoundException(CommonExceptions.UserPasswordMisMatch);
+            throw new BadHttpRequestException("Credentials are Wrong", 401);
         }
 
         var refreshToken = Guid.NewGuid().ToString();

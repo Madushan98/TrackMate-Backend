@@ -4,6 +4,7 @@ using AutoMapper;
 using BaseService.DataContext;
 using DAOLIbrary.User;
 using DTOLibrary.Common;
+using DTOLibrary.Exceptions;
 using DTOLibrary.Helpers;
 using DTOLibrary.UserDto;
 using Microsoft.EntityFrameworkCore;
@@ -22,54 +23,10 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter,
-        PaginationFilter pagination)
-    {
-        var queryable = _context.Users.AsNoTracking();
+   
+   
 
-        queryable = AddFilterOnQuery(filter, queryable);
-
-        var pagedResponse = await PagedResponse<User>.ToPagedList(queryable, pagination);
-        return MappingHelper.MapPagination<UserResponse, User>(pagedResponse, _mapper);
-    }
-
-    private IQueryable<User> AddFilterOnQuery(UserFilter filter, IQueryable<User> queryable)
-    {
-        if (Guid.Empty != filter?.UserId)
-        {
-            queryable = queryable.Where(user => user.UserId == filter.UserId);
-        }
-
-        if (!string.IsNullOrEmpty(filter?.NationalId))
-        {
-            queryable = queryable.Where(user => user.NationalId.StartsWith(filter.NationalId));
-        }
-
-        return queryable;
-    }
-
-    public async Task<UserResponse> CreateUserAsync(CreateUserRequest createUserRequest)
-    {
-        if (await GetUserByNationIdAsync(createUserRequest.NationalId) != null)
-            throw new ValidationException("User With Same NationalCardId Already Exists");
-
-        var user = _mapper.Map<User>(createUserRequest);
-        // user.UserRoles = new List<UserRoleUser>();
-        // var (encryptedPassword, key, iv) = _cryptoService.Encrypt(userRequest.Password);
-        // user.Password = encryptedPassword;
-
-        var entityEntry = await _context.Users.AddAsync(user);
-        var saveChangesAsync = await _context.SaveChangesAsync();
-        if (saveChangesAsync > 0)
-        {
-            var userByIdAsync = await GetUserByIdAsync(entityEntry.Entity.UserId);
-            return _mapper.Map<UserResponse>(userByIdAsync);
-        }
-
-        return null;
-        ;
-    }
-
+   
 
     public async Task<UserResponse> GetUserByIdAsync(Guid userId)
     {
@@ -95,5 +52,41 @@ public class UserService : IUserService
 
  
        return firstOrDefaultAsync;
+    }
+
+    public async Task<UserResponse> GetUserDetailsAsync(string nationalId)
+    {
+        var result = await GetUserByNationIdAsync(nationalId);
+        
+        return   _mapper.Map<UserResponse>(result);
+    }
+
+    public async Task<UserResponse> UpdateUserAsync(string nationalId, UserUpdateRequest updateUserRequest)
+    {
+        var existUser = await GetUserByNationIdAsync(nationalId);
+        if (existUser == null)
+        {
+            throw new BadHttpRequestException(CommonExceptions.UserNotFound.Message, 500); 
+        }
+        
+        var user =  _mapper.Map<User>(updateUserRequest);
+
+        user.UserId = existUser.UserId;
+        user.IsVertified = existUser.IsVertified;
+        user.Iv = existUser.Iv;
+        user.Password = existUser.Password;
+        user.Key = existUser.Key;
+        user.UserType = existUser.UserType;
+        _context.Users.Update(user);
+        var saveChangesAsync = await _context.SaveChangesAsync();
+        if (saveChangesAsync < 0)
+        {
+            throw new BadHttpRequestException(CommonExceptions.UserNotFound.Message, 500); 
+        }
+
+        var userResponse = _mapper.Map<UserResponse>(user);
+
+        return userResponse;
+
     }
 }

@@ -35,9 +35,11 @@ public class TokenService : ITokenService
 
         return new LoginResponse()
         {
+            NationalId = userResponse.NationalId,
             Token = _jwtSecurityTokenHandler.WriteToken(token),
             RefreshToken = refreshToken,
             Id = userId,
+            UserType = userResponse.UserType,
             User = userResponse
         };
     }

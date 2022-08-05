@@ -1,6 +1,7 @@
 ﻿using AuthService.Contract;
 using AuthService.Services;
 using AutoMapper;
+using DTOLibrary.Exceptions;
 using DTOLibrary.UserDto;
 using DTOLibrary.UserDto.Login;
 using Microsoft.AspNetCore.Mvc;
@@ -21,16 +22,20 @@ public class AuthController : Controller
 
     [HttpPost(ApiRoutes.Auth.RegisterUser)]
     [ProducesResponseType(typeof(UserResponse), 200)]
+    [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] CreateUserRequest createUserRequest)
     {
-        var response = await _service.RegisterUserAsync(createUserRequest);
+       
 
+        var response = await _service.RegisterUserAsync(createUserRequest);
+        
         return Accepted(response);
     }
 
 
     [HttpPost(ApiRoutes.Auth.LoginUser)]
     [ProducesResponseType(typeof(UserResponse), 200)]
+    [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] LoginRequest loginRequest)
     {
         var response = await _service.LoginUserAsync(loginRequest);

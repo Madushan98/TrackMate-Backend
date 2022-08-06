@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using DAOLibrary.Pass;
 using MessagePack;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAOLibrary.User;
 
+[Index(nameof(UserDao.NationalId), IsUnique=true)] 
 public class UserDao
 {
     public Guid Id { get; set; }

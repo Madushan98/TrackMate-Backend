@@ -25,6 +25,31 @@ public class UserData : BaseDataInit<UserDao>
                 Key = Key,
                 Iv = Iv
             },
+            
+            new UserDao()
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111112"),
+                NationalId = "988888888",
+                FirstName = "User",
+                LastName = "User",
+                IsVertified = true,
+                UserType = Constants.UserTypes[Constants.UserUserRole],
+                Password = Pass,
+                Key = Key,
+                Iv = Iv
+            },
+            new UserDao()
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111113"),
+                NationalId = "988888188",
+                FirstName = "Scanner",
+                LastName = "Scanner",
+                IsVertified = true,
+                UserType = Constants.UserTypes[Constants.ScannerUserRole],
+                Password = Pass,
+                Key = Key,
+                Iv = Iv
+            },
         };
 
     }

@@ -1,4 +1,6 @@
+using System.Data.Common;
 using Base;
+using BaseService.Constants;
 using BaseService.DataContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connectionString = EnvConstants.DbConnection!;
+var connectionString = Environment.GetEnvironmentVariable(EnvConstants.DbConnection);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
 builder.Services.AddDbContext<DBContext>(
     dbContextOptions => dbContextOptions

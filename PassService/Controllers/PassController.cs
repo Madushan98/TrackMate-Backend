@@ -17,7 +17,7 @@ public class PassController: Controller
     private readonly IMapper _mapper;
     private readonly IPassServices _service;
 
-    public PassController(IPassServices service, IMapper mapper, ICryptoService cryptoService)
+    public PassController(IPassServices service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.Controllers;
 
+[ApiController]
 public class UserController : Controller
 {
     private readonly IMapper _mapper;

@@ -14,4 +14,6 @@ public class CreatePassRequest
     public DateTime EndDateTime { get; set; }
 
     public Guid UserId { get; set; }
+    
+    public Guid ApprovedUserId { get; set; }
 }

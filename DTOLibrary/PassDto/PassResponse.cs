@@ -4,6 +4,7 @@ namespace DTOLibrary.PassDto;
 
 public class PassResponse
 {
+    public Guid Id { get; set; }
     
     public DateTime GeneratedDateTime { get; set; }
 

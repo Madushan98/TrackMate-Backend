@@ -5,7 +5,7 @@ using DAOLIbrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 
-namespace AuthService.Mapper;
+namespace BaseService.Contract.Mappers;
 
 public class UserProfile : Profile
 {

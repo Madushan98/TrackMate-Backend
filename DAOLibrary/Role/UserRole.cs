@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using DAOLibrary.Role;
 
-namespace DAOLIbrary.Role;
+namespace DAOLibrary.Role;
 
 public class UserRole
 {

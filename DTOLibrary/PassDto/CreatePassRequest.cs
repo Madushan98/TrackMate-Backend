@@ -2,16 +2,13 @@
 
 public class CreatePassRequest
 {
-    
-    public DateTime GeneratedDateTime { get; set; }
-
-    public bool IsValid { get; set; }
-
-    public bool IsApproved { get; set; }
-
-    public DateTime StartDateTime { get; set; }
-
-    public DateTime EndDateTime { get; set; }
-
+    public string NationalId { get; set; }
+    public bool IsReoccurring { get; set; }
+    public DateTime? StartDateTime { get; set; }
+    public DateTime? EndDateTime { get; set; }
     public Guid UserId { get; set; }
+
 }
+
+
+

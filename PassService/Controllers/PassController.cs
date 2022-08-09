@@ -5,6 +5,7 @@ using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
+using DTOLibrary.PassDto.Filters;
 using Microsoft.AspNetCore.Mvc;
 using PassService.ApiRoutes.V1;
 using PassService.Services;
@@ -45,6 +46,7 @@ public class PassController: Controller
     }
     
     [HttpPost(PassApiRoutes.Pass.Create)]
+    [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> Create(CreatePassRequest createPassRequest)
     {
         var result = _mapper.Map<PassDao>(createPassRequest); 
@@ -81,6 +83,7 @@ public class PassController: Controller
     }
     
     [HttpPost(PassApiRoutes.Pass.VerifyToken)]
+    [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> ScanToken(string createPassRequest)
     {
         var pass = await _service.GetScanData(createPassRequest);

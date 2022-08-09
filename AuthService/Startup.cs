@@ -1,5 +1,6 @@
 using AuthService.Services;
 using Base;
+using BaseService.Contract.Mappers;
 using BaseService.DataContext;
 using BaseService.Services;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,7 @@ namespace AuthService
                     .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup),typeof(CommonMapper));
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

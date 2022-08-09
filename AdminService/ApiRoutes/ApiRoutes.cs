@@ -1,4 +1,4 @@
-﻿namespace AuthService.Contract;
+﻿namespace AdminService.ApiRoutes;
 
 public class ApiRoutes
 {
@@ -8,18 +8,17 @@ public class ApiRoutes
 
     public static class User
     {
-     
-        public const string Get = Base + "/User/" + NationalId;
-        public const string Update = Base + "/User/" + NationalId;
-        public const string NationalId = "{nationalId}";
+        public const string GetAll = Base + "/User";
+        public const string Create = Base + "/User";
+        public const string Get = Base + "/User/" + UserId;
+        public const string Update = Base + "/User/" + UserId;
+        public const string Delete = Base + "/User/" + UserId;
+        public const string ApproveUser = Base + "/user-validation/" + UserId; 
+        public const string UserId = "{userId}";
+        
     }
     
-    public static class Auth
-    {
-        public const string RegisterUser = Base + "/register";
-        public const string LoginUser = Base + "/login";
-    }
-
+   
 
     public static class Permission
     {

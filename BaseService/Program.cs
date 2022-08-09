@@ -1,4 +1,6 @@
+using System.Data.Common;
 using Base;
+using BaseService.Constants;
 using BaseService.DataContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connectionString = EnvConstants.DbConnection!;
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
+var connectionString = EnvConstants.DbConnection;
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 builder.Services.AddDbContext<DBContext>(
     dbContextOptions => dbContextOptions
         .UseMySql(connectionString, serverVersion,
@@ -17,7 +19,6 @@ builder.Services.AddDbContext<DBContext>(
                     "BaseService"))
         .EnableDetailedErrors());
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

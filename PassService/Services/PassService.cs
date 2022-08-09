@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.Pass;
-using DAOLIbrary.User;
+using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
@@ -24,6 +24,7 @@ public class PassService: IPassServices
         _mapper = mapper;
         _encryptService = encryptService;
     }
+
 
     
     public async Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination)
@@ -76,4 +77,15 @@ public class PassService: IPassServices
         return pass;
     }
 
+    public async Task<UserDao?> GetUserByNationalIdAsync(string nationalId)
+    {
+        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId).AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (firstOrDefaultAsync == null)
+        {
+            
+        }
+        return firstOrDefaultAsync;
+    }
 }

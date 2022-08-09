@@ -1,8 +1,14 @@
-namespace DAOLIbrary.User;
+using System.ComponentModel.DataAnnotations;
+using DAOLibrary.Pass;
+using MessagePack;
+using Microsoft.EntityFrameworkCore;
 
-public class User
+namespace DAOLibrary.User;
+
+[Index(nameof(UserDao.NationalId), IsUnique=true)] 
+public class UserDao
 {
-    public Guid UserId { get; set; }
+    public Guid Id { get; set; }
     public string NationalId { get; set; } = null!;
     public string? FirstName { get; set; }
     public string? LastName { get; set; } 
@@ -18,4 +24,5 @@ public class User
     public string? District { get; set; }
     public bool IsVertified { get; set; }
     public string? DeviceId { get; set; }
+    public  ICollection<UserPassDao>? Passes { get; set; } 
 }

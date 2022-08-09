@@ -12,6 +12,8 @@ public class PassResponse
 
     public bool IsApproved { get; set; }
 
+    public bool IsReoccurring { get; set; }
+
     public DateTime StartDateTime { get; set; }
 
     public DateTime EndDateTime { get; set; }
@@ -19,6 +21,7 @@ public class PassResponse
     public Guid UserId { get; set; }
     public UserResponse User { get; set; }
 
+    public string NationalId { get; set; }
     public virtual ICollection<PassResponse> PassLogs { get; set; }
 
 }

@@ -15,3 +15,8 @@ dotnet ef database update 0 && dotnet ef migrations remove && dotnet ef migratio
 dotnet ef migrations add Migration7265 && dotnet ef database update
 
 Execute from \workflow-api\WorkflowService>
+
+
+
+//Lambda Package 
+dotnet lambda package

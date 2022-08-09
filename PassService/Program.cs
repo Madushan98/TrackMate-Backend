@@ -1,4 +1,5 @@
 using Base;
+using BaseService.Contract.Mappers;
 using BaseService.DataContext;
 using BaseService.Services;
 using Microsoft.AspNetCore.DataProtection;
@@ -35,6 +36,7 @@ builder.Services.AddDataProtection().UseCryptographicAlgorithms(
             ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
         }
     );;
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DAOLIbrary.Role;
+using DAOLibrary.Role;
 
 namespace DAOLibrary.Role;
 

@@ -1,18 +1,20 @@
 using AuthService.Domain.Filters;
 using AuthService.Models.Request.Queries;
 using AutoMapper;
-using DAOLIbrary.User;
+using DAOLibrary.Pass;
+using DAOLibrary.User;
 using DTOLibrary.Common;
+using DTOLibrary.PassDto;
 using DTOLibrary.UserDto;
 
-namespace BaseService.Contract.Mappers;
+namespace PassService.Mapper;
 
-public class UserProfile : Profile
+public class PassProfile : Profile
 {
-    public UserProfile()
+    public PassProfile()
     {
-        CreateMap<User, CreateUserRequest>().ReverseMap();
-        CreateMap<User, UserResponse>().ReverseMap();
+        CreateMap<PassDao, CreatePassRequest>().ReverseMap();
+        CreateMap<PassDao, PassResponse>().ReverseMap();
         CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
         CreateMap<GetAllUserQuery, UserFilter>().ReverseMap();
     }

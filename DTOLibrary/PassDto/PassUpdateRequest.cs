@@ -9,6 +9,8 @@ public class PassUpdateRequest
     public bool IsValid { get; set; }
 
     public bool IsApproved { get; set; }
+    
+    public bool IsReoccurring { get; set; }
 
     public DateTime StartDateTime { get; set; }
 

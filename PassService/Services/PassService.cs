@@ -70,7 +70,6 @@ public class PassService: IPassServices
         var pass =await  _context.Passes
             .Include(dao=>dao.PassLogs)
             .ThenInclude(logDao=>logDao.Scanner)
-            .Include(dao=>dao.ApprovedUser)
             .Include(dao=>dao.User)
             .AsNoTracking()
             .FirstOrDefaultAsync(pass => pass.Id == guid);

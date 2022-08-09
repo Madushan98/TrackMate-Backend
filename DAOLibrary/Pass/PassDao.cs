@@ -19,8 +19,5 @@ public class PassDao
     public Guid UserId { get; set; }
     public User User { get; set; }
     
-    public Guid ApprovedUserId { get; set; }
-    public User ApprovedUser { get; set; }
-    
     public virtual ICollection<PassLogDao> PassLogs { get; set; }
 }

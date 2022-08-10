@@ -28,7 +28,7 @@ public class UserController : Controller
         var response = await _service.UpdateUserAsync(nationalId,userUpdateRequest);
         if (response == null) return BadRequest();
 
-        return Accepted(response);
+        return Ok(response);
     }
 
     [HttpGet(ApiRoutes.User.Get)]
@@ -38,6 +38,6 @@ public class UserController : Controller
         var resonse = await _service.GetUserDetailsAsync(nationalId);
         if (resonse == null) return BadRequest();
 
-        return Accepted(resonse);
+        return Ok(resonse);
     }
 }

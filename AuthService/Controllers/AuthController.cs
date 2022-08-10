@@ -25,11 +25,9 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] CreateUserRequest createUserRequest)
     {
-       
-
         var response = await _service.RegisterUserAsync(createUserRequest);
-        
-        return Accepted(response);
+
+        return Ok(response);
     }
 
 
@@ -40,6 +38,6 @@ public class AuthController : Controller
     {
         var response = await _service.LoginUserAsync(loginRequest);
 
-        return Accepted(response);
+        return Ok(response);
     }
 }

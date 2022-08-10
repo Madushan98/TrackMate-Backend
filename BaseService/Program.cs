@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connectionString = Environment.GetEnvironmentVariable(EnvConstants.DbConnection);
+var connectionString = EnvConstants.DbConnection;
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
 builder.Services.AddDbContext<DBContext>(
     dbContextOptions => dbContextOptions

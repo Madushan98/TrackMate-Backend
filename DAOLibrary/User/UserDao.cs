@@ -10,14 +10,22 @@ public class UserDao
 {
     public Guid Id { get; set; }
     public string NationalId { get; set; } = null!;
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; } 
+    public string? FullName { get; set; }
     public string? Key { get; set; }
     public string? Iv { get; set; }
     public string Password { get; set; } = null!;
+    
     public DateTime BirthDate { get; set; }
+    
     public DateTime JoinedDate { get; set; }
+    
     public string? PrimaryContactNumber { get; set; }
+    
+    public string? EmergencyContactNumber { get; set; }
+    
+    public string? Gender { get; set; }
+    
+    public string? Location { get; set; }
     public string? UserType { get; set; }
     public string? Address { get; set; }
     public string? Town { get; set; }

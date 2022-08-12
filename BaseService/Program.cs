@@ -13,7 +13,7 @@ var connectionString = EnvConstants.DbConnection;
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
 builder.Services.AddDbContext<DBContext>(
     dbContextOptions => dbContextOptions
-        .UseMySql(connectionString, serverVersion,
+        .UseNpgsql(connectionString,
             builder =>
                 builder.MigrationsAssembly(
                     "BaseService"))

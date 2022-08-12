@@ -27,9 +27,9 @@ jobs:
       run: dotnet restore
     - name: Build Auth Service
       working-directory: AuthService 
-      run: dotnet build --no-restore
+      run: dotnet lambda package
     - name: Deploy to Lambda
-      run: dotnet lambda deploy-serverless --region us-west-2
+      run: aws lambda update-function-code --function-name Auth-Service --zip-file fileb://AuthService/bin/Release/net6.0/AuthService.zip
       
       
       

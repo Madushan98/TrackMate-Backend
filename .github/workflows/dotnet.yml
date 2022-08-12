@@ -12,7 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      working-directory: ./Services
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -26,7 +25,7 @@ jobs:
       run: dotnet tool install -g Amazon.Lambda.Tools
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
+    - name: Build Auth Service
       working-directory: AuthService 
       run: dotnet build --no-restore
     - name: Deploy to Lambda

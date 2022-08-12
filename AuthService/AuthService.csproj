@@ -33,8 +33,4 @@
       <ProjectReference Include="..\DTOLibrary\DTOLibrary.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mapper" />
-    </ItemGroup>
-
 </Project>

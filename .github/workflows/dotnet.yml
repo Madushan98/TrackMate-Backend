@@ -29,7 +29,7 @@ jobs:
       working-directory: AuthService 
       run: dotnet build --no-restore
     - name: Deploy to Lambda
-      run: dotnet lambda deploy-serverless
+      run: dotnet lambda deploy-serverless --region
       
       
       

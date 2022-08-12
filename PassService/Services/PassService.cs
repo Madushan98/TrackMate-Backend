@@ -1,12 +1,10 @@
-﻿using AuthService.Domain.Filters;
-using AutoMapper;
+﻿using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.Pass;
 using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
-using DTOLibrary.PassDto.Filters;
 using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,62 +27,53 @@ public class PassService: IPassServices
 
 
     
-    public async Task<PagedResponse<PassResponse>> GetAllPass(PassFilter filter,PaginationFilter pagination)
+    public async Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination)
     {
         var queryable = _context.Passes.AsNoTracking();
-        queryable = AddFilterOnQuery(filter, queryable);
         var pagedResponse = await PagedResponse<PassDao>.ToPagedList(queryable, pagination);
-        return MappingHelper.MapPagination<PassResponse, PassDao>(pagedResponse, _mapper);
+        return pagedResponse;
     }
-    
-    private IQueryable<PassDao> AddFilterOnQuery(PassFilter filter, IQueryable<PassDao> queryable)
+
+    public async Task<PassDao?> GetPassById(Guid id)
     {
-        if (Guid.Empty != filter?.UserId)
-        {
-            queryable = queryable.Where(pass => pass.UserId == filter.UserId);
-        }
+        var pass = await _context.Passes.FirstOrDefaultAsync(pass => pass.Id == id);
+        return pass;
+    }
+
+    public async Task<bool> DeleteById(Guid id)
+    {
+        var pass = await _context.Passes
+            .FirstOrDefaultAsync(pass=>pass.Id == id);
+
+        _context.Passes.Remove(pass);
         
-
-        return queryable;
+        var saveChangesAsync = await _context.SaveChangesAsync();
+        return saveChangesAsync > 0;
     }
-
     
-    public async Task<PassResponse> CreatePass(CreatePassRequest createPassRequest)
+    public async Task<PassDao> CreatePass(PassDao pass)
     {
-        var user = GetUserByNationalIdAsync(createPassRequest.NationalId).Result;
-        if (user == null)
-        {
-            return null;
-        }
-     
-        var createPass = _mapper.Map<PassDao>(createPassRequest);
-        createPass.UserId = user.Id;
-        createPass.IsApproved = false;
-        createPass.IsValid = false;
-        createPass.GeneratedDateTime = DateTime.Now;
-
-        _context.Passes.Add(createPass);
-       var saveChanges =  await _context.SaveChangesAsync();
-       if (saveChanges > 0)
-       {
-           return _mapper.Map<PassResponse>(createPass);
-       }
-       
-       return null;
+        _context.Passes.Add(pass);
+        await _context.SaveChangesAsync();
+        return pass;
     }
 
-    public string CreatePassToke(string passId)
+    public string CreatePassToke(Guid passId)
     {
-        return _encryptService.EncryptPass(passId);
+        return _encryptService.EncryptPass(passId.ToString());
     }
 
     public async Task<PassDao> GetScanData(string token)
     {
         var id = _encryptService.DecryptPass(token);
-        var Guid = System.Guid.Parse(id);
+        var guid = System.Guid.Parse(id);
+        Console.WriteLine(guid);
         var pass =await  _context.Passes
             .Include(dao=>dao.PassLogs)
-            .FirstOrDefaultAsync(x => x.Id == Guid);;
+            .ThenInclude(logDao=>logDao.Scanner)
+            .Include(dao=>dao.User)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(pass => pass.Id == guid);
         return pass;
     }
 

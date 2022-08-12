@@ -2,7 +2,7 @@
 using DAOLibrary.Pass;
 using DTOLibrary.PassDto;
 
-namespace BaseService.Contract.Mappers.Pass;
+namespace BaseService.Contract.Mappers;
 
 public class PassMapper : Profile
 {

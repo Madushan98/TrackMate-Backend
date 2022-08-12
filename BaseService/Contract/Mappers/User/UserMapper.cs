@@ -5,8 +5,8 @@ using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 
-namespace BaseService.Contract.Mappers.User;
 
+namespace BaseService.Contract.Mappers.User;
 public class UserProfile : Profile
 {
     public UserProfile()

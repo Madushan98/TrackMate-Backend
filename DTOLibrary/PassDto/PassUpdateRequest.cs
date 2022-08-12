@@ -16,5 +16,4 @@ public class PassUpdateRequest
 
     public DateTime EndDateTime { get; set; }
     
-    public Guid ApprovedUserId { get; set; }
 }

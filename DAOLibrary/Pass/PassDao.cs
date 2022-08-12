@@ -1,10 +1,12 @@
-﻿
+﻿using DAOLibrary.User;
+
 
 namespace DAOLibrary.Pass;
 
 public class PassDao
 {
     public Guid Id { get; set; }
+
     public DateTime GeneratedDateTime { get; set; }
 
     public bool IsReoccurring { get; set; }
@@ -18,6 +20,8 @@ public class PassDao
     public DateTime? EndDateTime { get; set; }
 
     public Guid UserId { get; set; }
+    public UserDao User { get; set; }
+    
 
     public string NationalId { get; set; }
     public UserPassDao? UserPassDao { get; set; }

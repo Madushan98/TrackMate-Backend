@@ -4,6 +4,8 @@ namespace DTOLibrary.PassDto;
 
 public class PassResponse
 {
+    public Guid Id { get; set; }
+    
     public DateTime GeneratedDateTime { get; set; }
 
     public bool IsValid { get; set; }
@@ -15,9 +17,11 @@ public class PassResponse
     public DateTime StartDateTime { get; set; }
 
     public DateTime EndDateTime { get; set; }
-
+    
     public Guid UserId { get; set; }
+    public UserResponse User { get; set; }
+
     public string NationalId { get; set; }
-    public Guid ApprovedUserId { get; set; }
     public virtual ICollection<PassResponse> PassLogs { get; set; }
+
 }

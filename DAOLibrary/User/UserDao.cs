@@ -15,9 +15,9 @@ public class UserDao
     public string? Iv { get; set; }
     public string Password { get; set; } = null!;
     
-    public DateTime BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
     
-    public DateTime JoinedDate { get; set; }
+    public DateTime? JoinedDate { get; set; }
     
     public string? PrimaryContactNumber { get; set; }
     

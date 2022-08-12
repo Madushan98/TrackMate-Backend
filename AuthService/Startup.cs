@@ -43,7 +43,7 @@ namespace AuthService
             // Replace 'YourDbContext' with the name of your own DbContext derived class.
             services.AddDbContext<DBContext>(
                 dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion,
+                    .UseNpgsql(connectionString, 
                         builder =>
                             builder.MigrationsAssembly(
                                 "BaseService"))

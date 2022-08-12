@@ -1,3 +1,4 @@
+using AdminService;
 using Amazon.Lambda.AspNetCoreServer;
 using Microsoft.AspNetCore.Hosting;
 

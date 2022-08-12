@@ -2,5 +2,8 @@
 
 public static class EnvConstants
 {
-    public const string DbConnection = "server=localhost; port=3306; database=covidbase; user=root; password=78951;";
+
+    public static string DbConnection =
+        Environment.GetEnvironmentVariable("Covid_Project_CockRoach_String")!;
+
 }

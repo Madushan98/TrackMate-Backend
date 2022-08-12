@@ -1,4 +1,4 @@
-﻿using Amazon.Lambda.AspNetCoreServer;
+using Amazon.Lambda.AspNetCoreServer;
 using Microsoft.AspNetCore.Hosting;
 
 namespace PassService
@@ -7,7 +7,7 @@ namespace PassService
     {
         protected override void Init(IWebHostBuilder builder)
         {
-            builder.UseStartup<Program>();
+            builder.UseStartup<Startup>();
         }
     }
 }

@@ -10,7 +10,6 @@ public class CreateUserRequest
     public DateTime BirthDate { get; set; }
     public string PrimaryContactNumber { get; set; }
     public string? EmergencyContactNumber { get; set; }
-    public string UserType { get; set; }
     public string Town { get; set; }
     public string District { get; set; }
     public string Address { get; set; }

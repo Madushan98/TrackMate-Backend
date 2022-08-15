@@ -2,7 +2,11 @@
 using BaseService.Contract.Mappers;
 using BaseService.DataContext;
 using BaseService.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.EntityFrameworkCore;
+using PassService.Services;
 
 namespace AdminService;
 
@@ -37,23 +41,29 @@ public class Startup
         // Use 'MariaDbServerVersion' for MariaDB.
         // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
         // For common usages, see pull request #1233.
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
-
         // Replace 'YourDbContext' with the name of your own DbContext derived class.
         services.AddDbContext<DBContext>(
             dbContextOptions => dbContextOptions
-                .UseMySql(connectionString, serverVersion,
+                .UseNpgsql(connectionString,
                     builder =>
                         builder.MigrationsAssembly(
                             "BaseService"))
                 .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
-
         
-
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );
+        services.AddScoped<IPassServices,PassService.Services.PassService>();
+        services.AddScoped<IPassLogService,PassLogService>();
+        services.AddSingleton<IPassEncryptService, PassEncryptService>();
+        services.AddDataProtection().UseCryptographicAlgorithms(
+            new AuthenticatedEncryptorConfiguration
+            {
+                EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+                ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+            }
+        );;
         services.AddAutoMapper(typeof(Startup),typeof(CommonMapper));
         services.AddSingleton<ICryptoService, CryptoService>();
         services.AddSingleton<ICryptoService, CryptoService>();

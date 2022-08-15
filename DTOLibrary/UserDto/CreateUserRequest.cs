@@ -15,5 +15,4 @@ public class CreateUserRequest
     public string District { get; set; }
     public string Address { get; set; }
     public string DeviceId { get; set; }
-    public DateTime JoinedDate { get; set; }
 }

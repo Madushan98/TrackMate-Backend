@@ -18,20 +18,51 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+          fetch-depth: 100
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v2
+    
+    - uses: dorny/paths-filter@v2
+      id: changes-AuthService
+      with:
+        filters: |
+          src:
+            - 'AuthService/**'
+            - 'BaseService/**'
+            
+    - uses: dorny/paths-filter@v2
+      id: changes-AdminService
+      with:
+        filters: |
+          src:
+            - 'AdminService/**'
+            - 'BaseService/**'
+
+    - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
     - name: AWS CLI
       run: dotnet tool install -g Amazon.Lambda.Tools
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build Auth Service
-      working-directory: AuthService 
+      working-directory: AuthService
+      if: steps.changes-AuthService.outputs.changed == 'true'
       run: dotnet lambda package
-    - name: Deploy to Lambda
+    - name: Deploy to Lambda Auth Service
+      if: steps.changes-AuthService.outputs.changed == 'true'
       run: aws lambda update-function-code --function-name Auth-Service --zip-file fileb://AuthService/bin/Release/net6.0/AuthService.zip
       
+    - name: Build Admin Service
+      working-directory: AdminService
+      if: steps.changes-AdminService.outputs.changed == 'true'
+      run: dotnet lambda package
+    - name: Deploy to Lambda Admin Service
+      if: steps.changes-AdminService.outputs.changed == 'true'
+      run: aws lambda update-function-code --function-name Admin-Service --zip-file fileb://AdminService/bin/Release/net6.0/AdminService.zip
+
       
       
       

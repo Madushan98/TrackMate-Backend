@@ -1,4 +1,4 @@
-using AdminService.ApiRoutes;
+using AdminService.Contract;
 using AdminService.Services;
 using AuthService.Domain.Filters;
 using AuthService.Models.Request.Queries;
@@ -7,7 +7,7 @@ using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Controllers;
+namespace AdminService.Controllers;
 
 public class UserController : Controller
 {

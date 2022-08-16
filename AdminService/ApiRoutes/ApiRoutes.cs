@@ -1,4 +1,4 @@
-﻿namespace AdminService.ApiRoutes;
+﻿namespace AdminService.Contract;
 
 public class ApiRoutes
 {

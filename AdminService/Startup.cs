@@ -38,7 +38,6 @@ public class Startup
         // Use 'MariaDbServerVersion' for MariaDB.
         // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
         // For common usages, see pull request #1233.
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
 
         // Replace 'YourDbContext' with the name of your own DbContext derived class.
         services.AddDbContext<DBContext>(

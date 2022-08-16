@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationM
 using Microsoft.EntityFrameworkCore;
 using PassService.Services;
 
-namespace AdminService;
+namespace PassService;
 
 public class Startup
 {

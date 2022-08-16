@@ -28,7 +28,6 @@ jobs:
       with:
         filters: |
           src:
-            - ''
             - '.github/**'
             
     - uses: dorny/paths-filter@v2

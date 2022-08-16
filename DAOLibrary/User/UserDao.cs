@@ -10,6 +10,7 @@ public class UserDao
 {
     public Guid Id { get; set; }
     public string NationalId { get; set; } = null!;
+    public string UserType { get; set; } = "User";
     public string? FullName { get; set; }
     public string? Key { get; set; }
     public string? Iv { get; set; }
@@ -26,7 +27,7 @@ public class UserDao
     public string? Gender { get; set; }
     
     public string? Location { get; set; }
-    public string? UserType { get; set; }
+    
     public string? Address { get; set; }
     public string? Town { get; set; }
     public string? District { get; set; }

@@ -29,17 +29,14 @@ jobs:
         filters: |
           src:
             - ''
-            - 'AuthService/**'
-            - 'BaseService/**'
+            - '.github/**'
             
     - uses: dorny/paths-filter@v2
       id: changes-AdminService
       with:
         filters: |
           src:
-            - ''
             - 'AdminService/**'
-            - 'BaseService/**'
 
     - uses: actions/setup-dotnet@v2
       with:

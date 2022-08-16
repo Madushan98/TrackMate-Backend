@@ -29,6 +29,7 @@ jobs:
         filters: |
           src:
             - 'AuthService/**'
+            - 'BaseService/**'
             
     - uses: dorny/paths-filter@v2
       id: changes-AdminService
@@ -36,6 +37,7 @@ jobs:
         filters: |
           src:
             - 'AdminService/**'
+            - 'BaseService/**'
 
     - uses: actions/setup-dotnet@v2
       with:

@@ -21,6 +21,7 @@ jobs:
       with:
           fetch-depth: 100
     - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2
     
     - uses: dorny/paths-filter@v2
       id: changes-AuthService

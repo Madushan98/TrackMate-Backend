@@ -27,17 +27,25 @@ jobs:
       id: changes-AuthService
       with:
         filters: |
-          src:
-            - 'AuthService/**'
+          changed:
+            - '.github/**'
             - 'BaseService/**'
+            - 'DAOLibrary/**'
+            - 'DTOLibrary/**'
+            - 'AuthService/**'
+
             
     - uses: dorny/paths-filter@v2
       id: changes-AdminService
       with:
         filters: |
-          src:
-            - 'AdminService/**'
+          changed:
+            - '.github/**'
             - 'BaseService/**'
+            - 'DAOLibrary/**'
+            - 'DTOLibrary/**'
+            - 'AdminService/**'
+
 
     - uses: actions/setup-dotnet@v2
       with:

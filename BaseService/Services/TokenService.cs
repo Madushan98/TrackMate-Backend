@@ -32,7 +32,7 @@ public class TokenService : ITokenService
             SigningCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)
         };
         var token = _jwtSecurityTokenHandler.CreateToken(tokenDescriptor);
-
+    
         return new LoginResponse()
         {
             NationalId = userResponse.NationalId,

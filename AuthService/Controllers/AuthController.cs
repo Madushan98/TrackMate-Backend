@@ -1,4 +1,5 @@
-﻿using AuthService.Contract;
+﻿using System.Net;
+using AuthService.Contract;
 using AuthService.Services;
 using AutoMapper;
 using DTOLibrary.Exceptions;
@@ -25,7 +26,17 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] CreateUserRequest createUserRequest)
     {
-        var response = await _service.RegisterUserAsync(createUserRequest);
+        UserResponse response = null;
+        
+        try
+        {
+             response = await _service.RegisterUserAsync(createUserRequest);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e);
+        }
+      
 
         return Ok(response);
     }
@@ -36,7 +47,17 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] LoginRequest loginRequest)
     {
-        var response = await _service.LoginUserAsync(loginRequest);
+        LoginResponse response = null ;
+
+        try
+        {
+            response = await _service.LoginUserAsync(loginRequest);
+        }
+        catch (Exception e)
+        {
+           return BadRequest(e);
+        }
+        
 
         return Ok(response);
     }

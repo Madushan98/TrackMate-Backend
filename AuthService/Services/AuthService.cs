@@ -74,6 +74,7 @@ public class AuthService : IAuthService
             new Claim("UserId", userDao.Id.ToString()),
             new Claim("Username", userDao.NationalId),
             new Claim("Permission", string.Join(",", new List<int>())),
+            new Claim("UserType",userDao.UserType )
         };
 
         var userResponse = _mapper.Map<UserResponse>(userDao);

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationService", "Orga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminService", "AdminService\AdminService.csproj", "{D739D93E-8C13-4344-B550-8069293F5549}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{77E33563-EF22-4A08-AB4C-B60C6FA02DA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{D739D93E-8C13-4344-B550-8069293F5549}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D739D93E-8C13-4344-B550-8069293F5549}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D739D93E-8C13-4344-B550-8069293F5549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E33563-EF22-4A08-AB4C-B60C6FA02DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E33563-EF22-4A08-AB4C-B60C6FA02DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E33563-EF22-4A08-AB4C-B60C6FA02DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E33563-EF22-4A08-AB4C-B60C6FA02DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

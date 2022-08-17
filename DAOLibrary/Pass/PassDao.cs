@@ -22,8 +22,8 @@ public class PassDao
     public Guid UserId { get; set; }
     public UserDao User { get; set; }
     
-
     public string NationalId { get; set; }
+    
     public UserPassDao? UserPassDao { get; set; }
 
     public virtual ICollection<PassLogDao> PassLogs { get; set; }

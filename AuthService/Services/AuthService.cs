@@ -28,7 +28,7 @@ public class AuthService : IAuthService
         _tokenService = tokenService;
     }
 
-    public async Task<UserResponse> RegisterUserAsync(CreateUserRequest createUserRequest)
+    public async Task<LoginResponse> RegisterUserAsync(CreateUserRequest createUserRequest)
     {
         var userExist = await GetUserByNationIdAsync(createUserRequest.NationalId);
 
@@ -48,8 +48,22 @@ public class AuthService : IAuthService
         var entityEntry = await _context.Users.AddAsync(userDao);
         var saveAsync = await _context.SaveChangesAsync();
 
-        return _mapper.Map<UserResponse>(userDao);
+        var userResponse = _mapper.Map<UserResponse>(userDao);
+        var refreshToken = Guid.NewGuid().ToString();
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, userDao.NationalId),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("UserId", userDao.Id.ToString()),
+            new Claim("Username", userDao.NationalId),
+            new Claim("Permission", string.Join(",", new List<int>())),
+            new Claim("UserType",userDao.UserType )
+        };
+        return _tokenService.GenerateAuthenticationResult(userDao.Id.ToString(), claims, refreshToken,
+            userResponse);
     }
+
+
 
     public async Task<LoginResponse> LoginUserAsync(LoginRequest loginRequest)
     {

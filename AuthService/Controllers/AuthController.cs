@@ -26,17 +26,17 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] CreateUserRequest createUserRequest)
     {
-        UserResponse response = null;
-        
+        LoginResponse response = null;
+
         try
         {
-             response = await _service.RegisterUserAsync(createUserRequest);
+            response = await _service.RegisterUserAsync(createUserRequest);
         }
         catch (Exception e)
         {
             return BadRequest(e);
         }
-      
+
 
         return Ok(response);
     }
@@ -47,7 +47,7 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(Error), 400)]
     public async Task<IActionResult> RegisterAsync([FromBody] LoginRequest loginRequest)
     {
-        LoginResponse response = null ;
+        LoginResponse response = null;
 
         try
         {
@@ -55,9 +55,9 @@ public class AuthController : Controller
         }
         catch (Exception e)
         {
-           return BadRequest(e);
+            return BadRequest(e);
         }
-        
+
 
         return Ok(response);
     }

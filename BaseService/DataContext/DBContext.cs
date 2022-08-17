@@ -1,4 +1,5 @@
 
+using Base.InitData.Passes;
 using Base.InitData.Users;
 using DAOLibrary.Pass;
 using DAOLibrary.User;
@@ -26,6 +27,7 @@ public class DBContext : DbContext
     private static void SetOnCreateData(ModelBuilder modelBuilder)
     {
         new UserData().Init(modelBuilder);
+        new PassData().Init(modelBuilder);
     }
 
  

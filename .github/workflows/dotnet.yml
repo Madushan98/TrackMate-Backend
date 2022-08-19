@@ -45,6 +45,17 @@ jobs:
             - 'DAOLibrary/**'
             - 'DTOLibrary/**'
             - 'AdminService/**'
+            
+    - uses: dorny/paths-filter@v2
+      id: changes-PassService
+      with:
+        filters: |
+          changed:
+            - '.github/**'
+            - 'BaseService/**'
+            - 'DAOLibrary/**'
+            - 'DTOLibrary/**'
+            - 'PassService/**'
 
 
     - uses: actions/setup-dotnet@v2
@@ -71,6 +82,13 @@ jobs:
       if: steps.changes-AdminService.outputs.changed == 'true'
       run: aws lambda update-function-code --function-name Admin-Service --zip-file fileb://AdminService/bin/Release/net6.0/AdminService.zip
 
+    - name: Build Pass Service
+      working-directory: PassService
+      if: steps.changes-PassService.outputs.changed == 'true'
+      run: dotnet lambda package
+    - name: Deploy to Lambda Pass Service
+      if: steps.changes-PassService.outputs.changed == 'true'
+      run: aws lambda update-function-code --function-name Pass-Service --zip-file fileb://PassService/bin/Release/net6.0/PassService.zip
       
       
       

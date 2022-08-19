@@ -37,7 +37,7 @@ public class PassService: IPassServices
 
     public async Task<PassDao?> GetPassById(Guid id)
     {
-        var pass = await _context.Passes.FirstOrDefaultAsync(pass => pass.Id == id);
+        var pass = await _context.Passes.Include(dao=>dao.PassLogs).ThenInclude(dao=>dao.Scanner).FirstOrDefaultAsync(pass => pass.Id == id);
         return pass;
     }
 

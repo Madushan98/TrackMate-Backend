@@ -1,4 +1,5 @@
-﻿using DTOLibrary.UserDto;
+﻿using DTOLibrary.PassLogDto;
+using DTOLibrary.UserDto;
 
 namespace DTOLibrary.PassDto;
 
@@ -21,5 +22,7 @@ public class PassResponse
     public Guid UserId { get; set; }
 
     public string NationalId { get; set; }
+
+    public ICollection<PassLogResponse> PassLogs { get; set; }
 
 }

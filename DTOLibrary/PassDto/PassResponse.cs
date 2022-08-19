@@ -22,6 +22,5 @@ public class PassResponse
     public UserResponse User { get; set; }
 
     public string NationalId { get; set; }
-    public virtual ICollection<PassResponse> PassLogs { get; set; }
 
 }

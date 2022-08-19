@@ -19,7 +19,6 @@ public class PassResponse
     public DateTime EndDateTime { get; set; }
     
     public Guid UserId { get; set; }
-    public UserResponse User { get; set; }
 
     public string NationalId { get; set; }
 

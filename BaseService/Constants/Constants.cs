@@ -15,12 +15,13 @@ public class Constants
     public static int ScannerUserRole = 1;
     public static int UserUserRole = 2;
 
-    public static List<string> PassReason = new List<string>()
+    public static List<string> PassCategory = new List<string>()
     {
-        "Medical", "Employee", "Other"
+       "Emergency", "Medical", "Employee", "Other"
     };
 
-    public static int MedicalReason = 0;
-    public static int EmployeeReason = 0;
-    public static int OtherReason = 0;
+    public static int EmergencyReason = 0;
+    public static int MedicalReason = 1;
+    public static int EmployeeReason = 2;
+    public static int OtherReason = 3;
 }

@@ -75,7 +75,7 @@ public class PassController: Controller
         return BadRequest();
     }
 
-    [HttpPost(PassApiRoutes.Pass.GetToken)]
+    [HttpGet(PassApiRoutes.Pass.GetToken)]
     [ProducesResponseType(typeof(PassTokenResponse), 200)]
     public async Task<IActionResult> GetToken(Guid createPassRequest)
     {

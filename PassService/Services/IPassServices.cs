@@ -2,6 +2,7 @@
 using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.PassDto;
+using DTOLibrary.PassDto.PassToken;
 using DTOLibrary.UserDto;
 
 namespace PassService.Services;
@@ -10,7 +11,7 @@ public interface IPassServices
 {
     Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination);
     Task<PassDao> CreatePass(PassDao passDao);
-    string CreatePassToke(Guid passId);
+    Task<PassTokenResponse> CreatePassToke(Guid passId);
     Task<PassDao> GetScanData(string token);
     Task<PassDao?> GetPassById(Guid id);
     Task<bool> DeleteById(Guid id);

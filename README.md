@@ -29,16 +29,38 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-  * [Online demo](#online-demo)
-* [Awesome projects](#Awesome-projects)
+ * [Demo](#Demo)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
-* [Sponsors](#sponsors)
-* [License](#license)
-
+* [Sponsors](#Sponsors)
 
 ## Overview
 
 Travelling in the lock-down period either for employment (private sector), essential services, hospitalization, medical clinics, visiting the pharmacy, medical consultation, or personal urgent matters require a Pass that the authorities (Police) can recognize instantly. In the current scenario in the Sri Lanka, the passes are unique to each institution/ company, and the authorities are faced with difficulties in figuring out the authenticity of them. Also, obtaining a pass is a manual process which takes time and effort as well as compromises Covid safety protocols. As most people carry a mobile phone these days, if there was to be a digital pass that can be read through QR code reader, this process could be mandated efficiently without any delays.
 
 So, the purpose of this project is to generate a pass that is unique to each institution and the person who is carrying it. This project consists of an interface for the user to request the Pass, then the request can be administered at different positions in the institution, where finally the Pass will be generated. The generated Pass upon approval is conveyed to a central database and users can use the pass through the QR code generated. Then the authorities such as police or security officers can use the mobile app to scan the QR code and verify the pass instantly. Additionally, the travelling history of the pass will be tracked through the scanning points which will be very useful for the scenarios such as Covid cluster identification.
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+
+## Demo 
+### Frontend ###
+
+### Backend ###
+
+### Mobile app ###
+
+## Roadmap ##
+Covid-pass can be extended to 
+
+## Contributing
+
+How to contribute:
+- Star this project on GitHub.
+- Report bugs or suggest features by creating new issues
+- Submit pull requests
+
+## Sponsors
+
+This project was started in fulfilment of the 5th semester module "Software project" at the Faculty of Engineering, University of Ruhuna, Hapugala, Galle, Sri Lanka.

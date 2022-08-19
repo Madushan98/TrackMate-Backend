@@ -5,6 +5,7 @@ using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
+using DTOLibrary.PassDto.PassToken;
 using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -58,9 +59,13 @@ public class PassService: IPassServices
         return pass;
     }
 
-    public string CreatePassToke(Guid passId)
+    public async Task<PassTokenResponse> CreatePassToke(Guid passId)
     {
-        return _encryptService.EncryptPass(passId.ToString());
+        var passTokenResponse = new PassTokenResponse()
+        {
+                PassToken = _encryptService.EncryptPass(passId.ToString()),
+        };
+        return passTokenResponse;
     }
 
     public async Task<PassDao> GetScanData(string token)

@@ -6,6 +6,7 @@ using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.PassDto;
 using DTOLibrary.PassDto.Filters;
+using DTOLibrary.PassDto.PassToken;
 using Microsoft.AspNetCore.Mvc;
 using PassService.ApiRoutes.V1;
 using PassService.Services;
@@ -75,9 +76,10 @@ public class PassController: Controller
     }
 
     [HttpPost(PassApiRoutes.Pass.GetToken)]
+    [ProducesResponseType(typeof(PassTokenResponse), 200)]
     public async Task<IActionResult> GetToken(Guid createPassRequest)
     {
-        var response =  _service.CreatePassToke(createPassRequest);
+        var response = await _service.CreatePassToke(createPassRequest);
 
         return Accepted(response);
     }

@@ -1,6 +1,9 @@
-﻿namespace UserService.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class UserController
+namespace UserService.Controllers;
+
+public class UserController : Controller
 {
+    
     
 }

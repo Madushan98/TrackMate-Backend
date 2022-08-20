@@ -9,6 +9,7 @@ public class PassApiRoutes
     public static class Pass
     {
         public const string GetAll = Base + "/Pass";
+        public const string GetAllByUserId = Base + "/Pass-userid/" + PassId;
         public const string Create = Base + "/Pass";
         public const string GetToken = Base + "/Pass/GetToken";
         public const string VerifyToken = Base + "/Pass/Verify";

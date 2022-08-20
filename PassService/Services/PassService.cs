@@ -98,4 +98,11 @@ public class PassService: IPassServices
         }
         return firstOrDefaultAsync;
     }
+    
+    public async Task<List<PassDao>> GetPassByUserId(Guid userId)
+    {
+        var passList =_context.Passes.Where(dao=>dao.UserId == userId).ToList();
+        
+        return passList;
+    }
 }

@@ -91,4 +91,17 @@ public class PassController: Controller
         var passResponse = await _service.GetScanData(createPassRequest);
         return Accepted(passResponse);
     }
+    
+    
+    [HttpGet(PassApiRoutes.Pass.GetAllByUserId)]
+    public ActionResult<List<PassResponse>> GetPassByUserId(Guid id)
+    {
+        var result = _service.GetPassByUserId(id).Result;
+        if (result == null)
+        {
+            return NoContent();
+        }
+        var response = _mapper.Map<List<PassResponse>>(result);
+        return response;
+    }
 }

@@ -25,6 +25,6 @@ public class PassApiRoutes
         public const string Get = Base + "/PassLog/" + PassId;
         public const string Update = Base + "/PassLog/" + PassId;
         public const string Delete = Base + "/PassLog/" + PassId;
-        public const string PassId = "{passLogId}";
+        public const string PassId = "{id:Guid}";
     }
 }

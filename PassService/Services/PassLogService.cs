@@ -20,6 +20,7 @@ public class PassLogService: IPassLogService
     
     public async Task<PassLogDao> SavePassLog(PassLogDao passLogDao)
     {
+        passLogDao.LogTime = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
         _context.PassLogs.Add(passLogDao);
         await _context.SaveChangesAsync();
         return passLogDao;

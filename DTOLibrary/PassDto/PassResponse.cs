@@ -18,5 +18,7 @@ public class PassResponse
     public DateTime EndDateTime { get; set; }
     public Guid UserId { get; set; }
     public string NationalId { get; set; }
-    
+    public string? FullName { get; set; }
+    public string PrimaryContactNumber { get; set; }
+    public bool IsVerifiedUser { get; set; }
 }

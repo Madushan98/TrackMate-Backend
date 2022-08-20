@@ -88,8 +88,7 @@ public class PassController: Controller
     [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> ScanToken(string createPassRequest)
     {
-        var pass = await _service.GetScanData(createPassRequest);
-        var response = _mapper.Map<PassResponse>(pass);
-        return Accepted(response);
+        var passResponse = await _service.GetScanData(createPassRequest);
+        return Accepted(passResponse);
     }
 }

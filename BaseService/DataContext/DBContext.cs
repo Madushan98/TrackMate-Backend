@@ -18,7 +18,6 @@ public class DBContext : DbContext
     public DbSet<UserDao> Users { get; set; }
     public DbSet<PassDao> Passes { get; set; }
     
-    public DbSet<UserPassDao> UserPasses { get;set; }
     public DbSet<PassLogDao> PassLogs { get; set; }
     
     public DbSet<VaccinationDataDao> VaccinationDatas { get;set; }

@@ -6,7 +6,7 @@ namespace DAOLibrary.Pass;
 public class PassDao
 {
     public Guid Id { get; set; }
-
+    
     public DateTime GeneratedDateTime { get; set; }
     public string PassCategory { get; set; }
     public string From { get; set; }

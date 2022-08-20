@@ -34,6 +34,6 @@ public class UserDao
     public string? District { get; set; }
     public bool IsVertified { get; set; }
     public string? DeviceId { get; set; }
-    public  ICollection<UserPassDao>? Passes { get; set; } 
-    public  ICollection<VaccinationUserDao>? VaccinationUserDao { get; set; }
+    public  ICollection<UserPassDao> Passes { get; set; } 
+    public  ICollection<VaccinationUserDao> VaccinationUserDao { get; set; }
 }

@@ -12,7 +12,7 @@ public interface IPassServices
     Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination);
     Task<PassDao> CreatePass(PassDao passDao);
     Task<PassTokenResponse> CreatePassToke(Guid passId);
-    Task<PassDao> GetScanData(string token);
+    Task<PassResponse> GetScanData(string token);
     Task<PassDao?> GetPassById(Guid id);
     Task<bool> DeleteById(Guid id);
 

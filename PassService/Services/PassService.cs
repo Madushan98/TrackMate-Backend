@@ -68,7 +68,7 @@ public class PassService: IPassServices
         return passTokenResponse;
     }
 
-    public async Task<PassDao> GetScanData(string token)
+    public async Task<PassResponse> GetScanData(string token)
     {
         var id = _encryptService.DecryptPass(token);
         var guid = System.Guid.Parse(id);
@@ -79,7 +79,12 @@ public class PassService: IPassServices
             .Include(dao=>dao.User)
             .AsNoTracking()
             .FirstOrDefaultAsync(pass => pass.Id == guid);
-        return pass;
+        var response = _mapper.Map<PassResponse>(pass);
+        response.FullName = pass.User.FullName;
+        response.PrimaryContactNumber = pass.User.PrimaryContactNumber;
+        response.IsVerifiedUser = pass.User.IsVertified;
+
+        return response;
     }
 
     public async Task<UserDao?> GetUserByNationalIdAsync(string nationalId)

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using DAOLibrary.Pass;
+using DAOLibrary.VacinationData;
 using MessagePack;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,4 +35,5 @@ public class UserDao
     public bool IsVertified { get; set; }
     public string? DeviceId { get; set; }
     public  ICollection<UserPassDao>? Passes { get; set; } 
+    public  ICollection<VaccinationUserDao>? VaccinationUserDao { get; set; }
 }

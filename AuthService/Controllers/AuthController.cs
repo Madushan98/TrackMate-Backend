@@ -45,7 +45,7 @@ public class AuthController : Controller
     [HttpPost(ApiRoutes.Auth.LoginUser)]
     [ProducesResponseType(typeof(UserResponse), 200)]
     [ProducesResponseType(typeof(Error), 400)]
-    public async Task<IActionResult> RegisterAsync([FromBody] LoginRequest loginRequest)
+    public async Task<IActionResult> LoginAsync([FromBody] LoginRequest loginRequest)
     {
         LoginResponse response = null;
 

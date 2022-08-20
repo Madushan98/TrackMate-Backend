@@ -84,7 +84,7 @@ public class PassController: Controller
         return Accepted(response);
     }
     
-    [HttpPost(PassApiRoutes.Pass.VerifyToken)]
+    [HttpGet(PassApiRoutes.Pass.VerifyToken)]
     [ProducesResponseType(typeof(PassResponse), 200)]
     public async Task<IActionResult> ScanToken(string createPassRequest)
     {

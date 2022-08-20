@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BaseService.Services;
 using DAOLibrary.Pass;
+using DTOLibrary.Common;
 using DTOLibrary.PassLogDto;
 using Microsoft.AspNetCore.Mvc;
 using PassService.ApiRoutes.V1;
@@ -28,5 +29,13 @@ public class PassLogController: Controller
 
         return Accepted(response);
     }
-    
+
+    [HttpGet(PassApiRoutes.PassLog.Get)]
+    public List<PassLogResponse> GetLogById(Guid id)
+    {
+        var result = _service.GetPassLogByPassId(id).Result;
+        var response = _mapper.Map<List<PassLogResponse>>(result);
+        return response;
+    }
+
 }

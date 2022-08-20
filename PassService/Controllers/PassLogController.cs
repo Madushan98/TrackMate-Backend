@@ -30,10 +30,26 @@ public class PassLogController: Controller
         return Accepted(response);
     }
 
-    [HttpGet(PassApiRoutes.PassLog.Get)]
-    public List<PassLogResponse> GetLogById(Guid id)
+    [HttpGet(PassApiRoutes.PassLog.GetByPassId)]
+    public List<PassLogResponse> GetLogByPassId(Guid id)
     {
         var result = _service.GetPassLogByPassId(id).Result;
+        var response = _mapper.Map<List<PassLogResponse>>(result);
+        return response;
+    }
+    
+    [HttpGet(PassApiRoutes.PassLog.GetByUserId)]
+    public List<PassLogResponse> GetLogByUserId(Guid id)
+    {
+        var result = _service.GetPassLogByUserId(id).Result;
+        var response = _mapper.Map<List<PassLogResponse>>(result);
+        return response;
+    }
+    
+    [HttpGet(PassApiRoutes.PassLog.GetByScannerId)]
+    public List<PassLogResponse> GetLogByScannerId(Guid id)
+    {
+        var result = _service.GetPassLogByScannerId(id).Result;
         var response = _mapper.Map<List<PassLogResponse>>(result);
         return response;
     }

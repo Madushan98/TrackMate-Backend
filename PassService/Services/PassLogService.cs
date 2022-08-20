@@ -31,4 +31,18 @@ public class PassLogService: IPassLogService
         
         return loglist;
     }
+    
+    public async Task<List<PassLogDao>> GetPassLogByUserId(Guid userId)
+    {
+        var loglist =_context.PassLogs.Where(dao=>dao.UserId == userId).ToList();
+        
+        return loglist;
+    }
+    
+    public async Task<List<PassLogDao>> GetPassLogByScannerId(Guid ScannerId)
+    {
+        var loglist =_context.PassLogs.Where(dao=>dao.ScannerId == ScannerId).ToList();
+        
+        return loglist;
+    }
 }

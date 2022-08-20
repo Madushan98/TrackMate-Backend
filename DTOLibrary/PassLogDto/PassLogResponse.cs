@@ -9,4 +9,7 @@ public class PassLogResponse
     
     public Guid ScannerId { get; set; }
     public UserResponse Scanner { get; set; }
+    
+    public Guid UserId { get; set; }
+    public Guid PassId { get; set; }
 }

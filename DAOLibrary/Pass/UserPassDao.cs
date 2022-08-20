@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DAOLibrary.User;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace DAOLibrary.Pass;
@@ -15,6 +16,6 @@ public class UserPassDao
     
     public Guid PassId { get; set; }
     
-    [ForeignKey("NotificationId")] public PassDao Pass { get; set; }
+    public virtual PassDao Pass { get; set; }
     
 }

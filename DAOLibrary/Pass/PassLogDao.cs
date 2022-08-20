@@ -16,4 +16,7 @@ public class PassLogDao
 
     public Guid PassId { get; set; }
     public virtual PassDao Pass { get; set; }
+    
+    public Guid UserId { get; set; }
+    public virtual UserDao User { get; set; }
 }

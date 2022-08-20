@@ -7,4 +7,6 @@ public class CreatePassLogRequest
     
     public Guid ScannerId { get; set; }
     public Guid PassId { get; set; }
+    
+    public Guid UserId { get; set; }
 }

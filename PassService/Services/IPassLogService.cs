@@ -10,4 +10,8 @@ public interface IPassLogService
     
     Task<List<PassLogDao>> GetPassLogByPassId(Guid passId);
 
+    Task<List<PassLogDao>> GetPassLogByUserId(Guid userId);
+
+    Task<List<PassLogDao>> GetPassLogByScannerId(Guid ScannerId);
+
 }

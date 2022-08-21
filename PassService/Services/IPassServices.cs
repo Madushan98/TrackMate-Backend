@@ -15,5 +15,6 @@ public interface IPassServices
     Task<PassResponse> GetScanData(string token);
     Task<PassDao?> GetPassById(Guid id);
     Task<bool> DeleteById(Guid id);
+    Task<List<PassDao>> GetPassByUserId(Guid userId);
 
 }

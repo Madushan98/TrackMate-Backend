@@ -84,11 +84,11 @@ public class PassController: Controller
         return Accepted(response);
     }
     
-    [HttpGet(PassApiRoutes.Pass.VerifyToken)]
+    [HttpPost(PassApiRoutes.Pass.VerifyToken)]
     [ProducesResponseType(typeof(PassResponse), 200)]
-    public async Task<IActionResult> ScanToken(string createPassRequest)
+    public async Task<IActionResult> ScanToken(VerifyTokenRequest verifyTokenRequest)
     {
-        var passResponse = await _service.GetScanData(createPassRequest);
+        var passResponse = await _service.GetScanData(verifyTokenRequest.PassToken);
         return Accepted(passResponse);
     }
 }

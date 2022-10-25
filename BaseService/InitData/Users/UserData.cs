@@ -28,7 +28,7 @@ public class UserData : BaseDataInit<UserDao>
             new UserDao()
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111112"),
-                NationalId = "988888888",
+                NationalId = Constants.UserNationalId,
                 FullName = "User",
                 IsVertified = true,
                 UserType = Constants.UserTypes[Constants.UserUserRole],
@@ -39,7 +39,7 @@ public class UserData : BaseDataInit<UserDao>
             new UserDao()
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111113"),
-                NationalId = "988888188",
+                NationalId = Constants.ScannerNationalId,
                 FullName = "Scanner",
                 IsVertified = true,
                 UserType = Constants.UserTypes[Constants.ScannerUserRole],

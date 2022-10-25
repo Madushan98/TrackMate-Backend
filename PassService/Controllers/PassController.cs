@@ -32,7 +32,7 @@ public class PassController: Controller
         var pagedResponse = await _service.GetAllPass(paginationFilter);
         var response = MappingHelper.MapPagination<PassResponse, PassDao>(pagedResponse, _mapper);
         if (response == null) return BadRequest();
-
+            
         return Accepted(response);
     }
     

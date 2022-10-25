@@ -12,7 +12,8 @@ public class PassLogDao
     public decimal Longitude { get; set; }
 
     public string LogTime { get; set; }
-
+    
+    public string Date { get; set; }
     public Guid ScannerId { get; set; }
     public virtual UserDao Scanner { get; set; }
 

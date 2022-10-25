@@ -11,6 +11,8 @@ public interface IPassLogService
     Task<List<PassLogDao>> GetPassLogByPassId(Guid passId);
 
     Task<List<PassLogDao>> GetPassLogByUserId(Guid userId);
+    
+    Task<List<PassLogDao>> GetPassLogByUserIdAndDate(Guid userId,DateTime dateTime);
 
     Task<List<PassLogDao>> GetPassLogByScannerId(Guid ScannerId);
 

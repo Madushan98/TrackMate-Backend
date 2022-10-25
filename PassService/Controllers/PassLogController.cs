@@ -52,7 +52,22 @@ public class PassLogController: Controller
         }
         var response = _mapper.Map<List<PassLogResponse>>(result);
         return response;
+    } 
+    
+    [HttpGet(PassApiRoutes.PassLog.GetByUserIdAndDate)]
+    public ActionResult<List<PassLogResponse>>  GetLogByUserIdAndDate(Guid id,[FromQuery] DateTime dateTime) 
+    {
+        var result = _service.GetPassLogByUserIdAndDate(id,dateTime).Result;
+        
+        if (result == null)
+        {
+            return NoContent();
+        }
+        var response = _mapper.Map<List<PassLogResponse>>(result);
+        return response;
     }
+    
+    
     
     [HttpGet(PassApiRoutes.PassLog.GetByScannerId)]
     public ActionResult<List<PassLogResponse>> GetLogByScannerId(Guid id)

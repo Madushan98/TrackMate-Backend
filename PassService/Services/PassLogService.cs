@@ -21,6 +21,7 @@ public class PassLogService: IPassLogService
     public async Task<PassLogDao> SavePassLog(PassLogDao passLogDao)
     {
         passLogDao.LogTime = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+        passLogDao.Date = DateTime.Now.ToString("MM/dd/yyyy");
         _context.PassLogs.Add(passLogDao);
         await _context.SaveChangesAsync();
         return passLogDao;
@@ -37,6 +38,14 @@ public class PassLogService: IPassLogService
     {
         var loglist =_context.PassLogs.Where(dao=>dao.UserId == userId).ToList();
         
+        return loglist;
+    }
+
+    public async Task<List<PassLogDao>> GetPassLogByUserIdAndDate(Guid userId,DateTime dateTime)
+    {
+        string date = dateTime.ToString("MM/dd/yyyy");
+        Console.WriteLine("Date    " + date);
+        var loglist =_context.PassLogs.Where(dao=>(dao.UserId == userId && dao.Date == date)).ToList();
         return loglist;
     }
     

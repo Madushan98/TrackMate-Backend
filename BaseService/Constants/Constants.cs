@@ -6,7 +6,7 @@ public class Constants
     public static Guid PassId = Guid.Parse("22222221-1111-1111-1111-111111111111");
     public static string AdminNationalId = "982351123V";
     public static string ScannerNationalId = "988888188";
-    public static string UserNationalId = "988888888";
+    public static string UserNationalId = "988888888"; 
     
     public static List<string> UserTypes = new List<string>()
     {

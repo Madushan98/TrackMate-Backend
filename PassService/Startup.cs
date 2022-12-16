@@ -35,20 +35,13 @@ public class Startup
         // {
         //     options.UseMySql(Configuration.GetConnectionString("WorkflowDB"));
         // });
-        string connectionString = EnvConstants.DbConnection;
 
         // Replace with your server version and type.
         // Use 'MariaDbServerVersion' for MariaDB.
         // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
         // For common usages, see pull request #1233.
         // Replace 'YourDbContext' with the name of your own DbContext derived class.
-        services.AddDbContext<DBContext>(
-            dbContextOptions => dbContextOptions
-                .UseNpgsql(connectionString,
-                    builder =>
-                        builder.MigrationsAssembly(
-                            "BaseService"))
-                .EnableDetailedErrors()); // <-- with debugging (remove for production).
+        DataBaseDependency.Initialize(services);
 
         
         services.AddControllers().AddNewtonsoftJson(options =>

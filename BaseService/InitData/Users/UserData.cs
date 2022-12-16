@@ -5,9 +5,9 @@ namespace Base.InitData.Users;
 
 public class UserData : BaseDataInit<UserDao>
 {
-    private const string Pass = "hUSqSs18RSXUGvqmpJ0Bvg==";
-    private const string Key = "jXaTiycDZAwJJ5V0845dZzV42//c9aRiYDtixz/VzUc=";
-    private const string Iv = "nRAnoIEBItu67NxD/ftlMg==";
+    private const string Pass = "KcsI7gpDcpIWTwuCQUIvDA==";
+    private const string Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=";
+    private const string Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==";
 
     public override List<UserDao> Data()
     {

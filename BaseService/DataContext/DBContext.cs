@@ -18,6 +18,7 @@ public class DBContext : DbContext
     public DbSet<UserDao> Users { get; set; }
     public DbSet<PassDao> Passes { get; set; }
     
+    public DbSet<PassDataMap> PassDataMaps { get; set; }
     public DbSet<PassLogDao> PassLogs { get; set; }
     
     public DbSet<VaccinationDataDao> VaccinationDatas { get;set; }
@@ -34,7 +35,7 @@ public class DBContext : DbContext
     private static void SetOnCreateData(ModelBuilder modelBuilder)
     {
         new UserData().Init(modelBuilder);
-        new PassData().Init(modelBuilder);
+        // new PassData().Init(modelBuilder);
     }
 
  

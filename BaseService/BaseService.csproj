@@ -40,7 +40,6 @@
 
     <ItemGroup>
       <Folder Include="Controllers" />
-      <Folder Include="Mappers" />
       <Folder Include="Migrations" />
     </ItemGroup>
 

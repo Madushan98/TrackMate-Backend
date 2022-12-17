@@ -17,6 +17,7 @@ public class PassData : BaseDataInit<PassDao>
                 From = "Rathnapura",
                 To = "Colombo",
                 PassCategory = "Employee",
+                Data = new List<PassDataMap>(),
                 IsValid = true,
                 IsApproved = true,
                 UserId = Constants.AdminUserId,

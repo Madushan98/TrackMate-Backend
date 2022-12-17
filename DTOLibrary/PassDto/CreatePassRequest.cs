@@ -1,4 +1,5 @@
-﻿namespace DTOLibrary.PassDto;
+﻿
+namespace DTOLibrary.PassDto;
 
 public class CreatePassRequest
 {
@@ -7,11 +8,14 @@ public class CreatePassRequest
     public string PassCategory { get; set; }
     public string From { get; set; }
     public string To { get; set; }
+    public List<PassData>? Data { get; set; } 
     public DateTime? StartDateTime { get; set; }
     public DateTime? EndDateTime { get; set; }
     public Guid UserId { get; set; }
 
 }
+
+
 
 
 

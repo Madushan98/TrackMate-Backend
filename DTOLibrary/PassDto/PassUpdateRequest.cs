@@ -12,5 +12,6 @@ public class PassUpdateRequest
     public bool IsReoccurring { get; set; }
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
+    public List<PassData>? Data { get; set; } 
     
 }

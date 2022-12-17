@@ -11,5 +11,6 @@ public class PassMapper : Profile
         CreateMap<CreatePassRequest, PassDao>().ReverseMap();
         CreateMap<PassUpdateRequest, PassDao>().ReverseMap();
         CreateMap<PassDao, PassResponse>().ReverseMap();
+        CreateMap<PassData, PassDataMap>().ReverseMap();
     }
 }

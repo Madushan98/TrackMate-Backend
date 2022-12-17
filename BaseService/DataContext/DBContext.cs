@@ -1,6 +1,7 @@
 
 using Base.InitData.Passes;
 using Base.InitData.Users;
+using DAOLibrary.Organization;
 using DAOLibrary.Pass;
 using DAOLibrary.User;
 using DAOLibrary.VaccinationData;
@@ -18,8 +19,11 @@ public class DBContext : DbContext
     public DbSet<UserDao> Users { get; set; }
     public DbSet<PassDao> Passes { get; set; }
     
+    
     public DbSet<PassDataMap> PassDataMaps { get; set; }
     public DbSet<PassLogDao> PassLogs { get; set; }
+    
+    public DbSet<OrganizationDao> Organizations { get;set; }
     
     public DbSet<VaccinationDataDao> VaccinationDatas { get;set; }
 

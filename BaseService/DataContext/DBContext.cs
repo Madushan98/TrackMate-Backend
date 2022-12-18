@@ -1,4 +1,5 @@
 
+using Base.InitData.Organization;
 using Base.InitData.Passes;
 using Base.InitData.Users;
 using DAOLibrary.Organization;
@@ -39,6 +40,7 @@ public class DBContext : DbContext
     private static void SetOnCreateData(ModelBuilder modelBuilder)
     {
         new UserData().Init(modelBuilder);
+        new OrganizationData().Init(modelBuilder);
         // new PassData().Init(modelBuilder);
     }
 

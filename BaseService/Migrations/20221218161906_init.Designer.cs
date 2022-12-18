@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BaseService.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20221217162102_organization")]
-    partial class organization
+    [Migration("20221218161906_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

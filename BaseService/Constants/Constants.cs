@@ -8,6 +8,9 @@ public class Constants
     public static string ScannerNationalId = "988888188";
     public static string UserNationalId = "988888888"; 
     
+    public static Guid OrganizationId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+
+    
     public static List<string> UserTypes = new List<string>()
     {
         "Admin", "Scanner", "User"

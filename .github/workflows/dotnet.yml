@@ -58,6 +58,17 @@ jobs:
             - 'DAOLibrary/**'
             - 'DTOLibrary/**'
             - 'PassService/**'
+            
+    - uses: dorny/paths-filter@v2
+      id: changes-OrganizationService
+      with:
+        filters: |
+          changed:
+            - '.github/**'
+            - 'BaseService/**'
+            - 'DAOLibrary/**'
+            - 'DTOLibrary/**'
+            - 'OrganizationService/**'
 
 
     - uses: actions/setup-dotnet@v2
@@ -91,7 +102,15 @@ jobs:
     - name: Deploy to Lambda Pass Service
       if: steps.changes-PassService.outputs.changed == 'true'
       run: aws lambda update-function-code --function-name Pass-Service --zip-file fileb://PassService/bin/Release/net6.0/PassService.zip
-      
+    
+    - name: Build Organization Service
+      working-directory: OrganizationService
+      if: steps.changes-OrganizationService.outputs.changed == 'true'
+      run: dotnet lambda package
+    - name: Deploy to Lambda Organization Service
+      if: steps.changes-OrganizationService.outputs.changed == 'true'
+      run: aws lambda update-function-code --function-name OrganizationService --zip-file fileb://OrganizationService/bin/Release/net6.0/OrganizationService.zip
+   
       
       
       

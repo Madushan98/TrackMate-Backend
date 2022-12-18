@@ -11,7 +11,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\BaseService\BaseService.csproj" />
+      <ProjectReference Include="..\DAOLibrary\DAOLibrary.csproj" />
+      <ProjectReference Include="..\DTOLibrary\DTOLibrary.csproj" />
     </ItemGroup>
 
 </Project>

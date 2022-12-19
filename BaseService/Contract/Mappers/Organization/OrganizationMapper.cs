@@ -16,6 +16,7 @@ public class OrganizationProfile : Profile
         CreateMap<OrganizationDao, CreateOrganizationRequest>().ReverseMap();
         CreateMap<OrganizationDao, OrganizationResponse>().ReverseMap();
         CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
-  
+        CreateMap<OrganizationDao, UpdateOrganizationRequest>().ReverseMap();
+
     }
 }

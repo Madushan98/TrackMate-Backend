@@ -41,11 +41,24 @@ public class OrganizationController : Controller
         return Accepted(response);
     }
     
+    [HttpPut(OrganizationApiRoutes.Organization.Update)]
+    public async Task<ActionResult<OrganizationResponse>> Update(Guid id,[FromBody] UpdateOrganizationRequest request)
+    {
+        var update =await _service.UpdateOrganization(id, request);
+        if (update != null)
+        {
+            return Ok(update);
+        }
+
+        return BadRequest();
+    }
+    
     [HttpPost(OrganizationApiRoutes.Organization.Create)]
     [ProducesResponseType(typeof(OrganizationResponse), 200)]
     public async Task<IActionResult> Create(CreateOrganizationRequest createOrganizationRequest)
     {
-        var result = _mapper.Map<OrganizationDao>(createOrganizationRequest); 
+        var result = _mapper.Map<OrganizationDao>(createOrganizationRequest);
+        result.IsApproved = false;
         var responseDao = await _service.CreateOrganization(result);
         var response = _mapper.Map<OrganizationResponse>(responseDao);
 

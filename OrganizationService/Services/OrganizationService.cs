@@ -38,6 +38,8 @@ public class OrganizationService : IOrganizationService
         await _context.SaveChangesAsync();
         return organization.Entity;
     }
+    
+    
 
     public Task<OrganizationDao> GetOrganizationById(Guid id)
     {
@@ -45,7 +47,29 @@ public class OrganizationService : IOrganizationService
         
         return organization;
     }
-    
+
+    public async Task<OrganizationResponse?> UpdateOrganization(Guid id, UpdateOrganizationRequest request)
+    {
+        var exists = await _context.Organizations.AsNoTracking().
+            FirstOrDefaultAsync(org => org.Id == id);
+        if (exists == null)
+        {
+            return null;
+        }
+
+        var organizationDao = _mapper.Map<OrganizationDao>(request);
+        _context.Organizations.Update(organizationDao);
+        var saveAsyncChange =await _context.SaveChangesAsync();
+        if (saveAsyncChange > 0)
+        {
+            var organizationById = await _context.Organizations.AsNoTracking().
+                FirstOrDefaultAsync(org => org.Id == id);
+            return _mapper.Map<OrganizationResponse>(organizationById);
+        }
+
+        return null;
+    }
+
     public async Task<bool> DeleteById(Guid id)
     {
         var organization = await _context.Organizations

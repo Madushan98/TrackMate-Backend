@@ -14,7 +14,7 @@ public class ApiRoutes
         public const string Update = Base + "/User/" + UserId;
         public const string Delete = Base + "/User/" + UserId;
         public const string ApproveUser = Base + "/user-validation/" + UserId; 
-        public const string UserId = "{userId}";
+        public const string UserId = "{id:Guid}";
         
     }
     

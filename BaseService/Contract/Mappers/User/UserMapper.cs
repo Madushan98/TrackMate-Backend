@@ -15,5 +15,7 @@ public class UserProfile : Profile
         CreateMap<UserDao, UserResponse>().ReverseMap();
         CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
         CreateMap<GetAllUserQuery, UserFilter>().ReverseMap();
+        CreateMap<UserDao, UserUpdateRequest>().ReverseMap();
+
     }
 }

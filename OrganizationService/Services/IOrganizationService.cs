@@ -10,7 +10,8 @@ public interface IOrganizationService
     Task<PagedResponse<OrganizationDao>> GetAllOrganization(PaginationFilter pagination);
     Task<OrganizationDao> CreateOrganization(OrganizationDao organizationDao);
     Task<OrganizationDao> GetOrganizationById(Guid id);
-    
+
+    Task<OrganizationResponse?> UpdateOrganization(Guid id,UpdateOrganizationRequest request);
     Task<bool> DeleteById(Guid id);
 
 }

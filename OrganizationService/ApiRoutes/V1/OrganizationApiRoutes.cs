@@ -12,6 +12,7 @@ public class OrganizationApiRoutes
         public const string Create = Base + "/Organization";
         public const string Get = Base + "/Organization/" + OrganizationId;
         public  const  string Delete = Base + "/Organization/" + OrganizationId;
+        public  const  string Update = Base + "/Organization/" + OrganizationId;
         private const string OrganizationId = "{id:Guid}";
      
     }

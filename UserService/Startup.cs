@@ -5,6 +5,7 @@ using Base.Contract;
 using BaseService.DataContext;
 using BaseService.Services;
 using Microsoft.EntityFrameworkCore;
+using UserService.Services;
 
 namespace UserService
 {
@@ -50,7 +51,7 @@ namespace UserService
                                 "BaseService"))
                     .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
-
+            services.AddScoped<IVaccinationService,VaccinationService>();
             services.AddAutoMapper(typeof(Startup),typeof(CommonMapper));
 
             services.AddControllers().AddNewtonsoftJson(options =>

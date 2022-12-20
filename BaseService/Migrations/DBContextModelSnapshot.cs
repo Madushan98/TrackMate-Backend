@@ -54,30 +54,6 @@ namespace BaseService.Migrations
                             IsApproved = true,
                             OrganizationName = "Test Organization",
                             OrganizationType = "Health"
-                        },
-                        new
-                        {
-                            Id = new Guid("11111111-1111-1111-1111-111111111112"),
-                            EmployeesWithPasses = 0,
-                            IsApproved = true,
-                            OrganizationName = "Test1 Organization",
-                            OrganizationType = "School"
-                        },
-                        new
-                        {
-                            Id = new Guid("11111111-1111-1111-1111-111111111113"),
-                            EmployeesWithPasses = 0,
-                            IsApproved = false,
-                            OrganizationName = "Test2 Organization",
-                            OrganizationType = "University"
-                        },
-                        new
-                        {
-                            Id = new Guid("11111111-1111-1111-1111-111111111114"),
-                            EmployeesWithPasses = 0,
-                            IsApproved = true,
-                            OrganizationName = "Test3 Organization",
-                            OrganizationType = "Garment"
                         });
                 });
 

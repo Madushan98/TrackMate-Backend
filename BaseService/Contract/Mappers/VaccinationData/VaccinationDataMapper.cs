@@ -7,6 +7,7 @@ using DTOLibrary.Common;
 using DTOLibrary.UserDto;
 using DTOLibrary.VaccinationDataDto;
 
+
 namespace BaseService.Contract.Mappers.VaccinationData;
 public class VaccinationDataProfile : Profile
 {

@@ -10,4 +10,6 @@ public interface IUserService
     Task<UserResponse> CreateUserAsync(CreateUserRequest createUserRequest);
     Task<UserResponse> GetUserByIdAsync(Guid userId);
     Task<UserResponse> ApproveUserAsync(Guid userId);
+    Task<UserResponse> UpdateUserAsync(Guid userId, UserUpdateRequest request);
+
 }

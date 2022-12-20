@@ -62,5 +62,16 @@ public class UserController : Controller
         return Accepted(resonse);
     }
     
-    
+    [HttpPut(ApiRoutes.User.Update)]
+    public async Task<IActionResult> Update(Guid id,[FromBody] UserUpdateRequest request)
+    {
+        var update =await _service.UpdateUserAsync(id, request);
+        if (update != null)
+        {
+            return Ok(update);
+        }
+
+        return BadRequest();
+    }
+
 }

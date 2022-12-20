@@ -95,7 +95,28 @@ public class UserService : IUserService
 
     }
 
- 
+    public async Task<UserResponse> UpdateUserAsync(Guid id, UserUpdateRequest request)
+    {
+        var exists = await _context.Users.AsNoTracking().
+            FirstOrDefaultAsync(user => user.Id == id);
+        if (exists == null)
+        {
+            return null;
+        }
+
+        var userDao = _mapper.Map<UserDao>(request);
+        userDao.Password = exists.Password;
+        _context.Users.Update(userDao);
+        var saveAsyncChange =await _context.SaveChangesAsync();
+        if (saveAsyncChange > 0)
+        {
+            var userById = await _context.Users.AsNoTracking().
+                FirstOrDefaultAsync(org => org.Id == id);
+            return _mapper.Map<UserResponse>(userById);
+        }
+
+        return null;
+    }
 
 
     private async Task<UserDao?> GetUserDaoByIdAsync(Guid userId)

@@ -43,20 +43,20 @@ public class UserController : Controller
     }
     
     [HttpGet(ApiRoutes.User.Get)]
-    public async Task<IActionResult> GetUserById(Guid userId)
+    public async Task<IActionResult> GetUserById(Guid id)
     {
         
-        var resonse = await _service.GetUserByIdAsync(userId);
+        var resonse = await _service.GetUserByIdAsync(id);
         if (resonse == null) return BadRequest();
 
         return Accepted(resonse);
     }
     
     [HttpPut(ApiRoutes.User.ApproveUser)]
-    public async Task<IActionResult> ApproveUserAsync(Guid userId) 
+    public async Task<IActionResult> ApproveUserAsync(Guid id) 
     {
         
-        var resonse = await _service.ApproveUserAsync(userId);
+        var resonse = await _service.ApproveUserAsync(id);
         if (resonse == null) return BadRequest();
 
         return Accepted(resonse);

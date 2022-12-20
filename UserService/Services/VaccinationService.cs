@@ -2,7 +2,6 @@
 using AutoMapper;
 using BaseService.DataContext;
 using DAOLibrary.VaccinationData;
-using DAOLibrary.VacinationData;
 using DTOLibrary.VaccinationDataDto;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,21 +21,20 @@ public class VaccinationService : IVaccinationService
 
     public async Task<List<VaccinationDataResponse>> GetUserVaccinationDetailList(Guid userId)
     {
-        var user = await _context.Users.AsNoTracking().Where(user => user.Id == userId)
-            .FirstOrDefaultAsync();
+        var user = await _context.Users.AsNoTracking().Where(user => user.Id == userId).Include(user => user.VaccinationData).FirstOrDefaultAsync();
+          
 
-        List<VaccinationDataDao> vaccinationDataResponses = new List<VaccinationDataDao>();
-
-
-        if (user.VaccinationUserDao == null)
+        if (user.VaccinationData == null)
         {
             return new List<VaccinationDataResponse>();
         }
         
-        foreach (var vaccinationUserDao in user.VaccinationUserDao)
+
+        List<VaccinationDataDao> vaccinationDataResponses = new List<VaccinationDataDao>();
+
+        foreach (var vaccinationData in user.VaccinationData)
         {
-            VaccinationDataDao vaccinationDataDao = vaccinationUserDao.VaccinationData;
-            vaccinationDataResponses.Add(vaccinationDataDao);
+            vaccinationDataResponses.Add(vaccinationData);
         }
 
         var response = _mapper.Map<List<VaccinationDataResponse>>(vaccinationDataResponses);
@@ -44,32 +42,25 @@ public class VaccinationService : IVaccinationService
         return response;
     }
 
-    public async Task<VaccinationDataResponse>  CreateUserVaccinationDetails(
+    public async Task<VaccinationDataResponse> CreateUserVaccinationDetails(
         VaccinationDataCreateRequest vaccinationDataCreateRequest)
     {
-        var user = await _context.Users.AsNoTracking().Where(user => user.Id == vaccinationDataCreateRequest.UserId)
+        var user = await _context.Users.AsNoTracking().Where(user => user.Id == vaccinationDataCreateRequest.UserId).Include(user => user.VaccinationData)
             .FirstOrDefaultAsync();
 
-        if (user.VaccinationUserDao == null)
+        if (user == null)
         {
-            user.VaccinationUserDao = new List<VaccinationUserDao>();
+            throw new Exception("User not found");
         }
-        
-        var newVaccinationData = _mapper.Map<VaccinationDataDao>(vaccinationDataCreateRequest); 
-        
+
+        var newVaccinationData = _mapper.Map<VaccinationDataDao>(vaccinationDataCreateRequest);
+
         var result = _context.VaccinationDatas.Add(newVaccinationData);
         
-        user.VaccinationUserDao.Add(new VaccinationUserDao()
-        {
-            VaccinationData = result.Entity,
-            User = user
-        });
-        
         await _context.SaveChangesAsync();
-        
+
         var response = _mapper.Map<VaccinationDataResponse>(result.Entity);
-        
+
         return response;
-        
     }
 }

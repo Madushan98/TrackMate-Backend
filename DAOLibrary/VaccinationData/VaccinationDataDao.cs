@@ -1,5 +1,4 @@
 ﻿using DAOLibrary.User;
-using DAOLibrary.VacinationData;
 
 namespace DAOLibrary.VaccinationData;
 
@@ -15,7 +14,9 @@ public class VaccinationDataDao
     
     public string vaccinatedPlace { get; set; }
     
-    public VaccinationUserDao VaccinationUserDao { get; set; } 
+    public  Guid UserId { get; set; }
+    
+    public UserDao User { get; set; }
     
 }
     

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using DAOLibrary.Organization;
 using DAOLibrary.Pass;
-using DAOLibrary.VacinationData;
+using DAOLibrary.VaccinationData;
 using MessagePack;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,11 +41,10 @@ public class UserDao
 
     public ICollection<UserPassDao> Passes { get; set; }
 
-    public ICollection<VaccinationUserDao> VaccinationUserDao { get; set; }
-
     public ICollection<PassDao>? EmployeeList { get; set; }
 
-    public Guid? OrganizationDaoId { get; set; } 
+    public Guid? OrganizationId { get; set; } 
 
     public OrganizationDao? Organization { get; set; }
+    public virtual ICollection<VaccinationDataDao> VaccinationData { get; set; } 
 }

@@ -6,7 +6,6 @@ using DAOLibrary.Organization;
 using DAOLibrary.Pass;
 using DAOLibrary.User;
 using DAOLibrary.VaccinationData;
-using DAOLibrary.VacinationData;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseService.DataContext;
@@ -28,9 +27,6 @@ public class DBContext : DbContext
     
     public DbSet<VaccinationDataDao> VaccinationDatas { get;set; }
 
-    public DbSet<VaccinationUserDao> VaccinationUsers { get;set; }
-
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

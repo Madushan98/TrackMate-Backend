@@ -25,7 +25,6 @@ public class PassDao
     public virtual ICollection<PassLogDao> PassLogs { get; set; }
 }
 
-
 public class PassDataMap
 {
     public  Guid Id { get; set; }

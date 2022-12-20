@@ -13,7 +13,7 @@ using PassService.ApiRoutes.V1;
 
 namespace PassService.Services;
 
-public class PassService: IPassServices
+public class PassService : IPassServices
 {
     private readonly DBContext _context;
     private readonly IMapper _mapper;
@@ -27,7 +27,6 @@ public class PassService: IPassServices
     }
 
 
-    
     public async Task<PagedResponse<PassDao>> GetAllPass(PaginationFilter pagination)
     {
         var queryable = _context.Passes.AsNoTracking();
@@ -44,14 +43,14 @@ public class PassService: IPassServices
     public async Task<bool> DeleteById(Guid id)
     {
         var pass = await _context.Passes
-            .FirstOrDefaultAsync(pass=>pass.Id == id);
+            .FirstOrDefaultAsync(pass => pass.Id == id);
 
         _context.Passes.Remove(pass);
-        
+
         var saveChangesAsync = await _context.SaveChangesAsync();
         return saveChangesAsync > 0;
     }
-    
+
     public async Task<PassDao> CreatePass(PassDao pass)
     {
         _context.Passes.Add(pass);
@@ -63,7 +62,7 @@ public class PassService: IPassServices
     {
         var passTokenResponse = new PassTokenResponse()
         {
-                PassToken = _encryptService.EncryptPass(passId.ToString()),
+            PassToken = _encryptService.EncryptPass(passId.ToString()),
         };
         return passTokenResponse;
     }
@@ -73,10 +72,10 @@ public class PassService: IPassServices
         var id = _encryptService.DecryptPass(token);
         var guid = System.Guid.Parse(id);
         Console.WriteLine(guid);
-        var pass =await  _context.Passes
-            .Include(dao=>dao.PassLogs)
-            .ThenInclude(logDao=>logDao.Scanner)
-            .Include(dao=>dao.User)
+        var pass = await _context.Passes
+            .Include(dao => dao.PassLogs)
+            .ThenInclude(logDao => logDao.Scanner)
+            .Include(dao => dao.User)
             .AsNoTracking()
             .FirstOrDefaultAsync(pass => pass.Id == guid);
         var response = _mapper.Map<PassResponse>(pass);
@@ -89,20 +88,21 @@ public class PassService: IPassServices
 
     public async Task<UserDao?> GetUserByNationalIdAsync(string nationalId)
     {
-        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId).AsNoTracking()
+        var firstOrDefaultAsync = await _context.Users.AsNoTracking().Where(user => user.NationalId == nationalId)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
 
         if (firstOrDefaultAsync == null)
         {
-            
         }
+
         return firstOrDefaultAsync;
     }
-    
+
     public async Task<List<PassDao>> GetPassByUserId(Guid userId)
     {
-        var passList =_context.Passes.Where(dao=>dao.UserId == userId).ToList();
-        
+        var passList = _context.Passes.Where(dao => dao.UserId == userId).ToList();
+
         return passList;
     }
 }

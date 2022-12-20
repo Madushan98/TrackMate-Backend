@@ -47,7 +47,7 @@ public class Startup
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );
-        services.AddScoped<IPassServices,PassService.Services.PassService>();
+        services.AddScoped<IPassServices,Services.PassService>();
         services.AddScoped<IPassLogService,PassLogService>();
         services.AddSingleton<IPassEncryptService, PassEncryptService>();
         services.AddDataProtection().UseCryptographicAlgorithms(

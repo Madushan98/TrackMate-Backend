@@ -13,13 +13,16 @@ public class Constants
     
     public static List<string> UserTypes = new List<string>()
     {
-        "Admin", "Scanner", "User"
+        "Admin", "Scanner", "User","Organization"
     };
 
     public static int AdminUserRole = 0;
     public static int ScannerUserRole = 1;
-    public static int UserUserRole = 2;
+    public static int UserUserRole = 2; 
+    public static int UserOrganizationRole = 3;
 
+
+    
     public static List<string> PassCategory = new List<string>()
     {
        "Emergency", "Medical", "Employee", "Other"

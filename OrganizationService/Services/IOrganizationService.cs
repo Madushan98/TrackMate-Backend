@@ -2,13 +2,14 @@
 using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.OrganizationDto;
+using DTOLibrary.OrganizationDto.Login;
 
 namespace OrganizationService.Services;
 
 public interface IOrganizationService
 {
     Task<PagedResponse<OrganizationDao>> GetAllOrganization(PaginationFilter pagination);
-    Task<OrganizationDao> CreateOrganization(OrganizationDao organizationDao);
+    Task<OrganizationLoginResponse> CreateOrganization(CreateOrganizationRequest organizationRequest);
     Task<OrganizationDao> GetOrganizationById(Guid id);
 
     Task<OrganizationResponse?> UpdateOrganization(Guid id,UpdateOrganizationRequest request);

@@ -11,6 +11,7 @@ public class UserApiRoutes
         public const string GetUserDetails = Base + "/user/" + UserId;
         public const string GetVaccinationDetails = Base + "/user/vaccination-details/" + UserId ;
         public const string UpdateVaccinationDetails = Base + "/user/vaccination-details"  ;
+        public const string UpdateUserOrganization = Base + "/user/update-organization"  ;
         public const string UserId = "{userId:Guid}";
     }
     

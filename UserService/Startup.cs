@@ -52,6 +52,7 @@ namespace UserService
                     .EnableDetailedErrors()); // <-- with debugging (remove for production).
 
             services.AddScoped<IVaccinationService,VaccinationService>();
+            services.AddScoped<IUserService,Services.UserService>();
             services.AddAutoMapper(typeof(Startup),typeof(CommonMapper));
 
             services.AddControllers().AddNewtonsoftJson(options =>

@@ -128,7 +128,7 @@ jobs:
       run: dotnet lambda package
     - name: Deploy to Lambda User Service
       if: steps.changes-UserService.outputs.changed == 'true'
-      run: aws lambda update-function-code --function-name user-Service --zip-file fileb://UserService/bin/Release/net6.0/UserService.zip
+      run: aws lambda update-function-code --function-name user-service --zip-file fileb://UserService/bin/Release/net6.0/UserService.zip
    
       
       

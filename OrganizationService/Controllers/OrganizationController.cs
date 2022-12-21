@@ -53,13 +53,11 @@ public class OrganizationController : Controller
         return BadRequest();
     }
     
-    [HttpPost(OrganizationApiRoutes.Organization.Create)]
+    [HttpPost(OrganizationApiRoutes.Organization.RegisterAsync)]
     [ProducesResponseType(typeof(OrganizationResponse), 200)]
-    public async Task<IActionResult> Create(CreateOrganizationRequest createOrganizationRequest)
+    public async Task<IActionResult> RegisterOrganizationAsync([FromBody] CreateOrganizationRequest createOrganizationRequest)
     {
-        var result = _mapper.Map<OrganizationDao>(createOrganizationRequest);
-        result.IsApproved = false;
-        var responseDao = await _service.CreateOrganization(result);
+        var responseDao = await _service.CreateOrganization(createOrganizationRequest);
         var response = _mapper.Map<OrganizationResponse>(responseDao);
 
         return Accepted(response);
@@ -82,5 +80,5 @@ public class OrganizationController : Controller
 
         return BadRequest();
     }
-    
+
 }

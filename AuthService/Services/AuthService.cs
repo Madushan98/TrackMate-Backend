@@ -72,7 +72,7 @@ public class AuthService : IAuthService
         bool checkExists = await IsOrganizationExists(organizationRequest);
         if (checkExists)
         {
-            throw new BadHttpRequestException("Organization Already Exists", 400);
+            return null;
         }
         var organizationDao = _mapper.Map<OrganizationDao>(organizationRequest);
         var (encryptedPassword, key, iv) = _cryptoService.Encrypt(organizationRequest.Password);

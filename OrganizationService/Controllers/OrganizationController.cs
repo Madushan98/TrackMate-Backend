@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AuthService.Domain.Filters;
+using AuthService.Models.Request.Queries;
+using AutoMapper;
 using DAOLibrary.Organization;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
@@ -31,6 +33,18 @@ public class OrganizationController : Controller
         return Accepted(response);
     }
     
+    [HttpGet(OrganizationApiRoutes.Organization.GetAllUser)]
+    public async Task<IActionResult> GetAllAsync([FromQuery] GetAllUserQuery query,
+        [FromQuery] PaginationRequest paginationRequest)
+    {
+        var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
+        var filter = _mapper.Map<UserFilter>(query);
+        var resonse = await _service.GetAllUsersAsync(filter, paginationFilter);
+        if (resonse == null) return BadRequest();
+
+        return Accepted(resonse);
+    }
+    
     [HttpGet(OrganizationApiRoutes.Organization.Get)]
     public async Task<ActionResult<OrganizationResponse>> Get(Guid id)
     {
@@ -39,6 +53,16 @@ public class OrganizationController : Controller
         var response = _mapper.Map<OrganizationResponse>(organization);
 
         return Accepted(response);
+    }
+    
+    [HttpGet(OrganizationApiRoutes.Organization.GetUserById)]
+    public async Task<IActionResult> GetUserById(Guid id)
+    {
+        
+        var resonse = await _service.GetUserByIdAsync(id);
+        if (resonse == null) return BadRequest();
+
+        return Accepted(resonse);
     }
     
     [HttpPut(OrganizationApiRoutes.Organization.Update)]
@@ -52,6 +76,8 @@ public class OrganizationController : Controller
 
         return BadRequest();
     }
+    
+
 
     [HttpDelete(OrganizationApiRoutes.Organization.Delete)]
     public async Task<IActionResult> Delete(Guid id)

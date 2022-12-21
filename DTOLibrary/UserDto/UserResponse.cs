@@ -1,3 +1,5 @@
+using DAOLibrary.VaccinationData;
+
 namespace DTOLibrary.UserDto;
 
 public class UserResponse
@@ -16,4 +18,5 @@ public class UserResponse
     public string UserType { get; set; }
     public ICollection<int> Permissions { get; set; }
     public ICollection<string> Roles { get; set; }
+    public virtual ICollection<VaccinationDataDao> VaccinationData { get; set; } 
 }

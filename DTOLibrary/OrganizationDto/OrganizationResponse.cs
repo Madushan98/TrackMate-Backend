@@ -16,8 +16,6 @@ public class OrganizationResponse
     
     public string UserType { get; set; }
     
-    public string Password { get; set; } = null!;
-    
     public string EmailAddress { get; set; }
 
     public string MobileNumber { get; set; }

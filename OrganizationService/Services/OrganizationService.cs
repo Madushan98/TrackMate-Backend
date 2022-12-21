@@ -1,9 +1,13 @@
-﻿using AutoMapper;
+﻿using AuthService.Domain.Filters;
+using AutoMapper;
 using BaseService.DataContext;
 using BaseService.Services;
 using DAOLibrary.Organization;
+using DAOLibrary.User;
 using DTOLibrary.Common;
+using DTOLibrary.Helpers;
 using DTOLibrary.OrganizationDto;
+using DTOLibrary.UserDto;
 using Microsoft.EntityFrameworkCore;
 
 namespace OrganizationService.Services;
@@ -13,16 +17,12 @@ public class OrganizationService : IOrganizationService
 {
     private readonly DBContext _context;
     private readonly IMapper _mapper;
-    private readonly ICryptoService _cryptoService;
-    private readonly ITokenService _tokenService;
 
 
-    public OrganizationService(DBContext context, IMapper mapper, ICryptoService cryptoService, ITokenService tokenService)
+    public OrganizationService(DBContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
-        _cryptoService = cryptoService;
-        _tokenService = tokenService;
     }
     
     public async Task<PagedResponse<OrganizationDao>>  GetAllOrganization(PaginationFilter pagination)
@@ -74,5 +74,47 @@ public class OrganizationService : IOrganizationService
         return saveChangesAsync > 0;
     }
     
+    public async Task<UserResponse> GetUserByIdAsync(Guid userId)
+    {
+        var result = await GetUserDaoByIdAsync(userId);
+        var userResponse = _mapper.Map<UserResponse>(result);
+        return userResponse;
+    }
     
+    
+
+    public async Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter,
+        PaginationFilter pagination)
+    {
+        var queryable = _context.Users.AsNoTracking();
+
+        queryable = AddFilterOnQuery(filter, queryable);
+
+        var pagedResponse = await PagedResponse<UserDao>.ToPagedList(queryable, pagination);
+        return MappingHelper.MapPagination<UserResponse, UserDao>(pagedResponse, _mapper);
+    }
+    
+    private IQueryable<UserDao> AddFilterOnQuery(UserFilter filter, IQueryable<UserDao> queryable)
+    {
+        if (Guid.Empty != filter?.UserId)
+        {
+            queryable = queryable.Where(user => user.Id == filter.UserId);
+        }
+
+        if (!string.IsNullOrEmpty(filter?.NationalId))
+        {
+            queryable = queryable.Where(user => user.NationalId.StartsWith(filter.NationalId));
+        }
+
+        return queryable;
+    }
+    
+    private async Task<UserDao?> GetUserDaoByIdAsync(Guid userId)
+    {
+        var user  = await  _context.Users
+            .AsNoTracking()
+            .Include(user=>user.VaccinationData)
+            .FirstOrDefaultAsync(user => user.Id == userId);
+        return user;
+    }
 }

@@ -66,8 +66,12 @@ public class AuthController : Controller
     public async Task<IActionResult> RegisterOrganizationAsync([FromBody] CreateOrganizationRequest createOrganizationRequest)
     {
         var response = await _service.RegisterOrganization(createOrganizationRequest);
-  
-        return Accepted(response);
+        if (response != null)
+        {
+            return Accepted(response);
+        }
+
+        return BadRequest();
     }
     
     [HttpPost(ApiRoutes.OrganizationAuth.LoginOrganization)]

@@ -18,10 +18,9 @@ public class CreateOrganizationRequest
 
     public string MobileNumber { get; set; }
     
-    public string TelNumber { get; set; }
     
     public string OrganizationType { get; set; }
     
-    public bool IsApproved { get; set; }
+ 
 
 }

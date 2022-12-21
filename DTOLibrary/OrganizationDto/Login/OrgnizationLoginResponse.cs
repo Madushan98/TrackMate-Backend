@@ -9,16 +9,5 @@ public class OrganizationLoginResponse
     public string Token { get; set; }
     public string RefreshToken { get; set; }
     
-    public string MobileNumber { get; set; }
-    
-    public string OrganizationType { get; set; }
-    
-    public string Address { get; set; }
-    
-    public string City { get; set; }
-    
-    public string State { get; set; }
-    
-    public string PostalCode { get; set; }
     public OrganizationResponse OrganizationResponse { get; set; }
 }

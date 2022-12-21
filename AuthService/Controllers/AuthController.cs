@@ -65,8 +65,8 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(OrganizationResponse), 200)]
     public async Task<IActionResult> RegisterOrganizationAsync([FromBody] CreateOrganizationRequest createOrganizationRequest)
     {
-        var responseDao = await _service.RegisterOrganization(createOrganizationRequest);
-        var response = _mapper.Map<OrganizationResponse>(responseDao);
+        var response = await _service.RegisterOrganization(createOrganizationRequest);
+  
         return Accepted(response);
     }
     
@@ -74,8 +74,8 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(OrganizationResponse), 200)]
     public async Task<IActionResult> LoginOrganizationAsync([FromBody] LoginOrganizationRequest loginOrganizationRequest)
     {
-        var responseDao = await _service.LoginOrganization(loginOrganizationRequest);
-        var response = _mapper.Map<OrganizationResponse>(responseDao);
+        var response = await _service.LoginOrganization(loginOrganizationRequest);
+        
         return Accepted(response);
     }
 }

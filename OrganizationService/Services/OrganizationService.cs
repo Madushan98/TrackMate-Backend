@@ -1,17 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
-using System.Security.Claims;
-using AutoMapper;
-using BaseService.Constants;
+﻿using AutoMapper;
 using BaseService.DataContext;
 using BaseService.Services;
 using DAOLibrary.Organization;
-using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.OrganizationDto;
-using DTOLibrary.OrganizationDto.Login;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace OrganizationService.Services;
 

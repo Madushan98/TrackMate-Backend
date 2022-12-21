@@ -360,6 +360,17 @@ namespace BaseService.Migrations
                         },
                         new
                         {
+                            Id = new Guid("11111111-1111-1111-1111-121111112112"),
+                            FullName = "Chathura Nuwan",
+                            IsVertified = false,
+                            Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==",
+                            Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=",
+                            NationalId = "9812345678",
+                            Password = "KcsI7gpDcpIWTwuCQUIvDA==",
+                            UserType = "User"
+                        },
+                        new
+                        {
                             Id = new Guid("11111111-1111-1111-1111-111111111112"),
                             FullName = "User",
                             IsVertified = true,

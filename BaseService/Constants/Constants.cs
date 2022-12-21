@@ -32,4 +32,10 @@ public class Constants
     public static int MedicalReason = 1;
     public static int EmployeeReason = 2;
     public static int OtherReason = 3;
+    
+    
+    public static List<string> OrganizationTypes = new List<string>()
+    {
+        "Banks", "Hospital", "School", "Other"
+    };
 }

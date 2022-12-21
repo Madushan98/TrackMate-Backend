@@ -1,4 +1,5 @@
 using DAOLibrary.VaccinationData;
+using DTOLibrary.VaccinationDataDto;
 
 namespace DTOLibrary.UserDto;
 
@@ -9,7 +10,7 @@ public class UserResponse
     public string? FullName { get; set; }
     public string Town { get; set; }
     public string District { get; set; }
-    public bool IsVertified { get; set; }
+    public string IsVertified { get; set; }
     public string? Gender { get; set; }
     public string? Location { get; set; }
     public DateTime BirthDate { get; set; }
@@ -18,5 +19,5 @@ public class UserResponse
     public string UserType { get; set; }
     public ICollection<int> Permissions { get; set; }
     public ICollection<string> Roles { get; set; }
-    public virtual ICollection<VaccinationDataDao> VaccinationData { get; set; } 
+    public virtual ICollection<VaccinationDataResponse> VaccinationData { get; set; } 
 }

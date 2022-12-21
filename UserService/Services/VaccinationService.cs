@@ -29,7 +29,6 @@ public class VaccinationService : IVaccinationService
             return new List<VaccinationDataResponse>();
         }
         
-
         List<VaccinationDataDao> vaccinationDataResponses = new List<VaccinationDataDao>();
 
         foreach (var vaccinationData in user.VaccinationData)

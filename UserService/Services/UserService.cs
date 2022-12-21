@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BaseService.Constants;
 using BaseService.DataContext;
 using DAOLibrary.Organization;
 using DTOLibrary.OrganizationDto;
@@ -30,6 +31,7 @@ public class UserService : IUserService
             .FirstOrDefaultAsync(organization => organization.Id == request.OrganizationId);
 
         user.Organization = organization;
+        user.IsVertified = Constants.VerificationStatus[Constants.Pending];
         _context.Users.Update(user);
         await _context.SaveChangesAsync();
         return new UpdateUserOrganizationResponse()

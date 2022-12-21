@@ -69,6 +69,17 @@ jobs:
             - 'DAOLibrary/**'
             - 'DTOLibrary/**'
             - 'OrganizationService/**'
+            
+    - uses: dorny/paths-filter@v2
+      id: changes-UserService
+      with:
+        filters: |
+          changed:
+            - '.github/**'
+            - 'BaseService/**'
+            - 'DAOLibrary/**'
+            - 'DTOLibrary/**'
+            - 'UserService/**'
 
 
     - uses: actions/setup-dotnet@v2
@@ -111,6 +122,13 @@ jobs:
       if: steps.changes-OrganizationService.outputs.changed == 'true'
       run: aws lambda update-function-code --function-name OrganizationService --zip-file fileb://OrganizationService/bin/Release/net6.0/OrganizationService.zip
    
-      
+    - name: Build User Service
+      working-directory: UserService
+      if: steps.changes-UserService.outputs.changed == 'true'
+      run: dotnet lambda package
+    - name: Deploy to Lambda User Service
+      if: steps.changes-UserService.outputs.changed == 'true'
+      run: aws lambda update-function-code --function-name UserService --zip-file fileb://UserService/bin/Release/net6.0/UserService.zip
+   
       
       

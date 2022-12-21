@@ -52,16 +52,6 @@ public class OrganizationController : Controller
 
         return BadRequest();
     }
-    
-    [HttpPost(OrganizationApiRoutes.Organization.RegisterAsync)]
-    [ProducesResponseType(typeof(OrganizationResponse), 200)]
-    public async Task<IActionResult> RegisterOrganizationAsync([FromBody] CreateOrganizationRequest createOrganizationRequest)
-    {
-        var responseDao = await _service.CreateOrganization(createOrganizationRequest);
-        var response = _mapper.Map<OrganizationResponse>(responseDao);
-
-        return Accepted(response);
-    }
 
     [HttpDelete(OrganizationApiRoutes.Organization.Delete)]
     public async Task<IActionResult> Delete(Guid id)

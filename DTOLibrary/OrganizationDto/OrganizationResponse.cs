@@ -22,8 +22,6 @@ public class OrganizationResponse
 
     public string MobileNumber { get; set; }
     
-    public string TelNumber { get; set; }
-    
     public string OrganizationType { get; set; }
     
     public int EmployeesWithPasses { get; set; }

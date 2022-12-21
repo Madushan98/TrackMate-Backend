@@ -39,37 +39,7 @@ public class OrganizationService : IOrganizationService
         return pagedResponse;
     }
 
-    public async Task<OrganizationLoginResponse> CreateOrganization(CreateOrganizationRequest organizationRequest)
-    {
-        
-        bool checkExists = await IsOrganizationExists(organizationRequest);
-        if (checkExists)
-        {
-            throw new ValidationException("Organization is already registered");
-        }
-        var organizationDao = _mapper.Map<OrganizationDao>(organizationRequest);
-        var (encryptedPassword, key, iv) = _cryptoService.Encrypt(organizationRequest.Password);
-        organizationDao.IsApproved = false;
-        organizationDao.Iv = iv;
-        organizationDao.Key = key;
-        organizationDao.Password = encryptedPassword;
-        organizationDao.UserType = Constants.UserTypes[Constants.UserOrganizationRole];
-        var organization = await _context.Organizations.AddAsync(organizationDao);
-        var organizationResponse = _mapper.Map<OrganizationResponse>(organizationDao);
-        var saveAsync = await _context.SaveChangesAsync();
-        var refreshToken = Guid.NewGuid().ToString();
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, organizationDao.EmailAddress),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("UserId", organization.Entity.Id.ToString()),
-            new Claim("Username", organizationDao.EmailAddress),
-            new Claim("Permission", string.Join(",", new List<int>())),
-            new Claim("UserType",organizationDao.UserType )
-        };
-        return _tokenService.GenerateOrganizationAuthenticationResult(organization.Entity.Id.ToString(), claims,
-            refreshToken, organizationResponse);
-    }
+  
     
     public Task<OrganizationDao> GetOrganizationById(Guid id)
     {
@@ -110,17 +80,6 @@ public class OrganizationService : IOrganizationService
         var saveChangesAsync = await _context.SaveChangesAsync();
         return saveChangesAsync > 0;
     }
-
-    private async Task<bool> IsOrganizationExists(CreateOrganizationRequest organizationRequest)
-    {
-        if (string.IsNullOrEmpty(organizationRequest.EmailAddress))
-        {
-            return false;
-        }
-
-        var firstOrDefault =await _context.Organizations.AsNoTracking()
-            .Where(org => org.EmailAddress.Equals(organizationRequest.EmailAddress)).FirstOrDefaultAsync();
-        return firstOrDefault != null;
-    }
+    
     
 }

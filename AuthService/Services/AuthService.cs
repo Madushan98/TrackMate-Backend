@@ -46,7 +46,6 @@ public class AuthService : IAuthService
         userDao.Password = encryptedPassword;
         userDao.Key = key;
         userDao.Iv = iv;
-        userDao.IsVertified = false;
         userDao.UserType = Constants.UserTypes[Constants.UserUserRole];
 
         var entityEntry = await _context.Users.AddAsync(userDao);

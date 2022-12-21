@@ -18,7 +18,7 @@ public class UserData : BaseDataInit<UserDao>
                 Id = Constants.AdminUserId,
                 NationalId = Constants.AdminNationalId,
                 FullName = "Admin",
-                IsVertified = true,
+                IsVertified = Constants.VerificationStatus[Constants.Verified],
                 UserType = Constants.UserTypes[Constants.AdminUserRole],
                 Password = Pass,
                 Key = Key,
@@ -30,7 +30,7 @@ public class UserData : BaseDataInit<UserDao>
                 Id = Guid.Parse("11111111-1111-1111-1111-121111112112"),
                 NationalId = "9812345678",
                 FullName = "Chathura Nuwan",
-                IsVertified = false,
+                IsVertified = Constants.VerificationStatus[Constants.NotVerified],
                 UserType = Constants.UserTypes[Constants.UserUserRole],
                 Password = Pass,
                 Key = Key,
@@ -42,7 +42,7 @@ public class UserData : BaseDataInit<UserDao>
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111112"),
                 NationalId = Constants.UserNationalId,
                 FullName = "User",
-                IsVertified = true,
+                IsVertified = Constants.VerificationStatus[Constants.Verified],
                 UserType = Constants.UserTypes[Constants.UserUserRole],
                 Password = Pass,
                 Key = Key,
@@ -53,8 +53,20 @@ public class UserData : BaseDataInit<UserDao>
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111113"),
                 NationalId = Constants.ScannerNationalId,
                 FullName = "Scanner",
-                IsVertified = true,
+                IsVertified = Constants.VerificationStatus[Constants.Verified],
                 UserType = Constants.UserTypes[Constants.ScannerUserRole],
+                Password = Pass,
+                Key = Key,
+                Iv = Iv
+            },
+            
+            new UserDao()
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111112213"),
+                NationalId = "9843211234",
+                FullName = "Achila Sandeep",
+                IsVertified = Constants.VerificationStatus[Constants.Pending],
+                UserType = Constants.UserTypes[Constants.UserUserRole],
                 Password = Pass,
                 Key = Key,
                 Iv = Iv

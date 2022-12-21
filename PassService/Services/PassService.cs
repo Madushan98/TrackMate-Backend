@@ -81,7 +81,6 @@ public class PassService : IPassServices
         var response = _mapper.Map<PassResponse>(pass);
         response.FullName = pass.User.FullName;
         response.PrimaryContactNumber = pass.User.PrimaryContactNumber;
-        response.IsVerifiedUser = pass.User.IsVertified;
 
         return response;
     }

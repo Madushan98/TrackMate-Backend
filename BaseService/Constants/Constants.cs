@@ -33,7 +33,15 @@ public class Constants
     public static int EmployeeReason = 2;
     public static int OtherReason = 3;
     
-    
+    public static List<string> VerificationStatus = new List<string>()
+    {
+        "Verified", "NotVerified", "Pending",
+    };
+
+    public static int Verified = 0;
+    public static int NotVerified = 1;
+    public static int Pending = 2;
+
     public static List<string> OrganizationTypes = new List<string>()
     {
         "Banks", "Hospital", "School", "Other"

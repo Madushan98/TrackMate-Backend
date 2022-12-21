@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AuthService.Domain.Filters;
 using AutoMapper;
+using BaseService.Constants;
 using BaseService.DataContext;
 using DAOLibrary.User;
 using DTOLibrary.Common;
@@ -88,7 +89,7 @@ public class UserService : IUserService
             throw new BadHttpRequestException("Credentials are Wrong", 500);
         }
         
-        userDao.IsVertified = true;
+        userDao.IsVertified = Constants.VerificationStatus[Constants.Verified];
         _context.Users.Update(userDao);
         var saveChangesAsync = await _context.SaveChangesAsync();
         return _mapper.Map<UserResponse>(userDao);

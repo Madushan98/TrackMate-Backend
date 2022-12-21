@@ -3,6 +3,7 @@ using AuthService.Contract;
 using AuthService.Services;
 using AutoMapper;
 using DTOLibrary.Exceptions;
+using DTOLibrary.OrganizationDto;
 using DTOLibrary.UserDto;
 using DTOLibrary.UserDto.Login;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +58,24 @@ public class AuthController : Controller
         {
             return BadRequest(e);
         }
-
-
         return Ok(response);
+    }
+    
+    [HttpPost(ApiRoutes.OrganizationAuth.RegisterOrganization)]
+    [ProducesResponseType(typeof(OrganizationResponse), 200)]
+    public async Task<IActionResult> RegisterOrganizationAsync([FromBody] CreateOrganizationRequest createOrganizationRequest)
+    {
+        var responseDao = await _service.RegisterOrganization(createOrganizationRequest);
+        var response = _mapper.Map<OrganizationResponse>(responseDao);
+        return Accepted(response);
+    }
+    
+    [HttpPost(ApiRoutes.OrganizationAuth.LoginOrganization)]
+    [ProducesResponseType(typeof(OrganizationResponse), 200)]
+    public async Task<IActionResult> LoginOrganizationAsync([FromBody] LoginOrganizationRequest loginOrganizationRequest)
+    {
+        var responseDao = await _service.LoginOrganization(loginOrganizationRequest);
+        var response = _mapper.Map<OrganizationResponse>(responseDao);
+        return Accepted(response);
     }
 }

@@ -14,6 +14,12 @@ public class ApiRoutes
         public const string NationalId = "{nationalId}";
     }
     
+    public static class  OrganizationAuth
+    {
+        public const string RegisterOrganization = Base + "/Orgnization/RegisterOrgnization";
+        public const string LoginOrganization = Base + "/Orgnization/LoginOrgnization";
+    }
+    
     public static class Auth
     {
         public const string RegisterUser = Base + "/register";

@@ -14,7 +14,7 @@ public interface ITokenService
         UserResponse userResponse);
     
     OrganizationLoginResponse GenerateOrganizationAuthenticationResult(string userId, IEnumerable<Claim> claims,
-        string refreshToken, OrganizationResponse userResponse);
+        string refreshToken, OrganizationResponse orgaizationResponse);
     string GenerateEmailVerificationToken(string userId, IEnumerable<Claim> claims);
         
         

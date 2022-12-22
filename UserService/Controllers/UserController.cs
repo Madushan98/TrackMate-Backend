@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using DAOLibrary.Pass;
+using DTOLibrary.Common;
+using DTOLibrary.Helpers;
+using DTOLibrary.PassDto;
 using DTOLibrary.UserDto.AddOrganization;
 using DTOLibrary.VaccinationDataDto;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +29,15 @@ public class UserController : Controller
         var response = await _service.UpdateUserOrganization(updateUserOrganizationRequest);
         ;
 
+        return Accepted(response);
+    }
+    
+    [HttpGet(UserApiRoutes.User.GetUserDetails)]
+    public async Task<IActionResult> Get(Guid userId)
+    {
+        var response = await _service.GetUserDetailsAsync(userId);
+           if (response == null) return BadRequest();
+            
         return Accepted(response);
     }
 }

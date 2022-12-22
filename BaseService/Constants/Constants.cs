@@ -35,7 +35,7 @@ public class Constants
     
     public static List<string> VerificationStatus = new List<string>()
     {
-        "Verified", "NotVerified", "Pending",
+        "Verified", "Not Verified", "Pending",
     };
 
     public static int Verified = 0;

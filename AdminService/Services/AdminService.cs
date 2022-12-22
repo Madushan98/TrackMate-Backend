@@ -107,6 +107,8 @@ public class UserService : IUserService
 
         var userDao = _mapper.Map<UserDao>(request);
         userDao.Password = exists.Password;
+        userDao.Iv = exists.Iv;
+        userDao.Key = exists.Key;
         _context.Users.Update(userDao);
         var saveAsyncChange =await _context.SaveChangesAsync();
         if (saveAsyncChange > 0)

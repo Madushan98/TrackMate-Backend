@@ -16,6 +16,7 @@ public class UserResponse
     public DateTime BirthDate { get; set; }
     public string PrimaryContactNumber { get; set; }
     public string? EmergencyContactNumber { get; set; }
+    public Guid? OrganizationId { get; set; } 
     public string UserType { get; set; }
     public ICollection<int> Permissions { get; set; }
     public ICollection<string> Roles { get; set; }

@@ -14,6 +14,7 @@ namespace OrganizationService.Services;
 
 
 public class OrganizationService : IOrganizationService
+
 {
     private readonly DBContext _context;
     private readonly IMapper _mapper;
@@ -93,7 +94,14 @@ public class OrganizationService : IOrganizationService
         var pagedResponse = await PagedResponse<UserDao>.ToPagedList(queryable, pagination);
         return MappingHelper.MapPagination<UserResponse, UserDao>(pagedResponse, _mapper);
     }
-    
+
+    public async Task<PagedResponse<UserResponse>> GetUserByOrganizationIdAsync(Guid id, PaginationFilter paginationFilter)
+    {
+        var queryable = _context.Users.AsNoTracking().Where(user=>user.OrganizationId == id);
+        var pagedResponse = await PagedResponse<UserDao>.ToPagedList(queryable, paginationFilter);
+        return MappingHelper.MapPagination<UserResponse, UserDao>(pagedResponse, _mapper);
+    }
+
     private IQueryable<UserDao> AddFilterOnQuery(UserFilter filter, IQueryable<UserDao> queryable)
     {
         if (Guid.Empty != filter?.UserId)

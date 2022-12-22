@@ -65,6 +65,16 @@ public class OrganizationController : Controller
         return Accepted(resonse);
     }
     
+    [HttpGet(OrganizationApiRoutes.Organization.GetUserByOrgId)]
+    public async Task<IActionResult> GetUserByOrganizationId(Guid id,[FromQuery] PaginationRequest paginationRequest)
+    {
+        var paginationFilter = _mapper.Map<PaginationFilter>(paginationRequest);
+        var resonse = await _service.GetUserByOrganizationIdAsync(id,paginationFilter);
+        if (resonse == null) return BadRequest();
+
+        return Accepted(resonse);
+    }
+    
     [HttpPut(OrganizationApiRoutes.Organization.Update)]
     public async Task<ActionResult<OrganizationResponse>> Update(Guid id,[FromBody] UpdateOrganizationRequest request)
     {

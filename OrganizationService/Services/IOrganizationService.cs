@@ -19,5 +19,7 @@ public interface IOrganizationService
     Task<UserResponse> GetUserByIdAsync(Guid userId);
     
     Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter, PaginationFilter paginationFilter);
+    
+    Task<PagedResponse<UserResponse>> GetUserByOrganizationIdAsync(Guid id, PaginationFilter paginationFilter);
 
 }

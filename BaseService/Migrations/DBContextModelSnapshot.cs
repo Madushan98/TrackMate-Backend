@@ -171,6 +171,10 @@ namespace BaseService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PassTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("StartDateTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -240,6 +244,10 @@ namespace BaseService.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("UserNatId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -363,7 +371,7 @@ namespace BaseService.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-121111112112"),
                             FullName = "Chathura Nuwan",
-                            IsVertified = "NotVerified",
+                            IsVertified = "Not Verified",
                             Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==",
                             Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=",
                             NationalId = "9812345678",
@@ -400,6 +408,28 @@ namespace BaseService.Migrations
                             Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==",
                             Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=",
                             NationalId = "9843211234",
+                            Password = "KcsI7gpDcpIWTwuCQUIvDA==",
+                            UserType = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111412213"),
+                            FullName = "Achila Nuwan",
+                            IsVertified = "Pending",
+                            Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==",
+                            Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=",
+                            NationalId = "9843211334",
+                            Password = "KcsI7gpDcpIWTwuCQUIvDA==",
+                            UserType = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111151112213"),
+                            FullName = "Chathura Sandeep",
+                            IsVertified = "Pending",
+                            Iv = "Qn0j+NTJFfCQ2Hw6WdjXqA==",
+                            Key = "S6yeuQw4VMYmzvTapS/Jph3oUct88Iqq0XprXWxfMpQ=",
+                            NationalId = "9842211234",
                             Password = "KcsI7gpDcpIWTwuCQUIvDA==",
                             UserType = "User"
                         });

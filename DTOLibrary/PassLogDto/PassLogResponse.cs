@@ -11,5 +11,6 @@ public class PassLogResponse
     
     public Guid ScannerId { get; set; }
     public Guid UserId { get; set; }
+    public string UserNatId { get; set; }
     public Guid PassId { get; set; }
 }

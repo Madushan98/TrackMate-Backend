@@ -7,6 +7,8 @@ public class PassDao
 {
     public Guid Id { get; set; }
     
+    public string PassTitle { get; set; }
+    
     public DateTime GeneratedDateTime { get; set; }
     public string PassCategory { get; set; }
     public string From { get; set; }
@@ -16,7 +18,6 @@ public class PassDao
     public bool IsApproved { get; set; }
     public DateTime? StartDateTime { get; set; }
     public DateTime? EndDateTime { get; set; }
-    
     public ICollection<PassDataMap>? Data { get; set; }
     public Guid UserId { get; set; }
     public UserDao User { get; set; }

@@ -16,6 +16,7 @@ public class PassLogDao
     public string Date { get; set; }
     public Guid ScannerId { get; set; }
     public virtual UserDao Scanner { get; set; }
+    public string UserNatId { get; set; }
 
     public Guid PassId { get; set; }
     public virtual PassDao Pass { get; set; }

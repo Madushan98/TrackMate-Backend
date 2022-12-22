@@ -3,6 +3,7 @@
 public class PassUpdateRequest
 {
     public Guid Id { get; set; }
+    public string PassTitle { get; set; }
     public DateTime GeneratedDateTime { get; set; }
     public bool IsValid { get; set; }
     public string PassCategory { get; set; }

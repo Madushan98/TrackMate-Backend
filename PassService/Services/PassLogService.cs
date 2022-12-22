@@ -20,6 +20,9 @@ public class PassLogService: IPassLogService
     
     public async Task<PassLogDao> SavePassLog(PassLogDao passLogDao)
     {
+        var user = _context.Users.AsNoTracking().FirstOrDefault(user => user.Id == passLogDao.UserId);
+
+        passLogDao.UserNatId = user.NationalId;
         passLogDao.LogTime = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
         passLogDao.Date = DateTime.Now.ToString("MM/dd/yyyy");
         _context.PassLogs.Add(passLogDao);

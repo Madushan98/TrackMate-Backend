@@ -22,4 +22,5 @@ public interface IOrganizationService
     
     Task<PagedResponse<UserResponse>> GetUserByOrganizationIdAsync(Guid id, PaginationFilter paginationFilter);
 
+    Task<UserResponse> UpdateUserByIdAsync(Guid id, UserUpdateRequest request);
 }

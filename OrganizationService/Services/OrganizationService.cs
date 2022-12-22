@@ -102,6 +102,27 @@ public class OrganizationService : IOrganizationService
         return MappingHelper.MapPagination<UserResponse, UserDao>(pagedResponse, _mapper);
     }
 
+    public async Task<UserResponse> UpdateUserByIdAsync(Guid id, UserUpdateRequest request)
+    {
+        var exists = await _context.Users.
+            FirstOrDefaultAsync(user => user.Id == id);
+        if (exists == null)
+        {
+            return null;
+        }
+
+        exists.IsVertified = request.IsVertified;
+        var saveAsyncChange =await _context.SaveChangesAsync();
+        if (saveAsyncChange > 0)
+        {
+            var userById = await _context.Users.AsNoTracking().
+                FirstOrDefaultAsync(org => org.Id == id);
+            return _mapper.Map<UserResponse>(userById);
+        }
+
+        return null;
+    }
+
     private IQueryable<UserDao> AddFilterOnQuery(UserFilter filter, IQueryable<UserDao> queryable)
     {
         if (Guid.Empty != filter?.UserId)

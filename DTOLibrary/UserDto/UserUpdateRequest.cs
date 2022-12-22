@@ -16,5 +16,6 @@ public class UserUpdateRequest
     public string IsVertified { get; set; }
     public string DeviceId { get; set; }
     public string UserType { get; set; }
+    public Guid? OrganizationId { get; set; } 
     public DateTime JoinedDate { get; set; }
 }

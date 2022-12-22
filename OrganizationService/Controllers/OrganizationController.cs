@@ -5,6 +5,7 @@ using DAOLibrary.Organization;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
 using DTOLibrary.OrganizationDto;
+using DTOLibrary.UserDto;
 using Microsoft.AspNetCore.Mvc;
 using OrganizationService.ApiRoutes.V1;
 using OrganizationService.Services;
@@ -60,6 +61,16 @@ public class OrganizationController : Controller
     {
         
         var resonse = await _service.GetUserByIdAsync(id);
+        if (resonse == null) return BadRequest();
+
+        return Accepted(resonse);
+    }
+    
+    [HttpPut(OrganizationApiRoutes.Organization.GetUserById)]
+    public async Task<IActionResult> UpdateUserById(Guid id,[FromBody] UserUpdateRequest request)
+    {
+        
+        var resonse = await _service.UpdateUserByIdAsync(id,request);
         if (resonse == null) return BadRequest();
 
         return Accepted(resonse);

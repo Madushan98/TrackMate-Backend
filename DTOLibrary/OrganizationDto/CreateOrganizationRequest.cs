@@ -12,6 +12,7 @@ public class CreateOrganizationRequest
     
     public string PostalCode { get; set; }
 
+    public string? TelNumber { get; set; }
     public string Password { get; set; }
     
     public string EmailAddress { get; set; }

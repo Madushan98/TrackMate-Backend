@@ -17,4 +17,5 @@ public interface IPassServices
     Task<bool> DeleteById(Guid id);
     Task<List<PassDao>> GetPassByUserId(Guid userId);
 
+    Task<PassResponse> UpdatePassById(Guid id, CreatePassRequest request);
 }

@@ -104,4 +104,25 @@ public class PassService : IPassServices
 
         return passList;
     }
+
+    public async Task<PassResponse> UpdatePassById(Guid id, CreatePassRequest request)
+    {
+        var exisit =await _context.Passes.AsNoTracking().FirstOrDefaultAsync(pass => pass.Id == id);
+        if (exisit == null)
+        {
+            return null;
+        }
+
+        var dao = _mapper.Map<PassDao>(request);
+        _context.Passes.Update(dao);
+        var saveAsyncChange =await _context.SaveChangesAsync();
+        if (saveAsyncChange > 0)
+        {
+            var organizationById = await _context.Passes.AsNoTracking().
+                FirstOrDefaultAsync(pass => pass.Id == id);
+            return _mapper.Map<PassResponse>(organizationById);
+        }
+
+        return null;
+    }
 }

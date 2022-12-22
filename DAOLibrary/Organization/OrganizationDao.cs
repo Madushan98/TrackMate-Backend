@@ -21,6 +21,8 @@ public class OrganizationDao
 
     public string? MobileNumber { get; set; }
 
+    /*public string? TelNumber { get; set; }*/
+
     public string? Key { get; set; }
 
     public string? Iv { get; set; }

@@ -104,4 +104,15 @@ public class PassController: Controller
         var response = _mapper.Map<List<PassResponse>>(result);
         return response;
     }
+    
+    [HttpPut(PassApiRoutes.Pass.Update)]
+    public async Task<IActionResult> UpdatePassByUserId(Guid id,[FromBody] CreatePassRequest request)
+    {
+        var result =await _service.UpdatePassById(id,request);
+        if (result == null)
+        {
+            return BadRequest();
+        }
+        return Accepted(result);
+    }
 }

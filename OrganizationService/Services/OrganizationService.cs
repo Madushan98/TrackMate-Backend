@@ -52,6 +52,9 @@ public class OrganizationService : IOrganizationService
         }
 
         var organizationDao = _mapper.Map<OrganizationDao>(request);
+        organizationDao.Iv = exists.Iv;
+        organizationDao.Password = exists.Password;
+        organizationDao.Key = exists.Key;
         _context.Organizations.Update(organizationDao);
         var saveAsyncChange =await _context.SaveChangesAsync();
         if (saveAsyncChange > 0)

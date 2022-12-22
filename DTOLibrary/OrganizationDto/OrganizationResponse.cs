@@ -16,6 +16,7 @@ public class OrganizationResponse
     
     public string UserType { get; set; }
     
+    public string? TelNumber { get; set; }
     public string EmailAddress { get; set; }
 
     public string MobileNumber { get; set; }

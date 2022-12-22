@@ -35,7 +35,7 @@ public class UserDao
     public string? Town { get; set; }
     
     public string? District { get; set; }
-    public string IsVertified { get; set; } = "Not Vertified";
+    public string IsVertified { get; set; } = "NotVerified";
 
     public string? DeviceId { get; set; }
 

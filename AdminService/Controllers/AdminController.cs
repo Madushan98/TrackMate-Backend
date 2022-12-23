@@ -5,6 +5,7 @@ using AuthService.Models.Request.Queries;
 using AutoMapper;
 using DTOLibrary.Common;
 using DTOLibrary.UserDto;
+using DTOLibrary.UserDto.AddOrganization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminService.Controllers;
@@ -69,6 +70,30 @@ public class UserController : Controller
         if (update != null)
         {
             return Ok(update);
+        }
+
+        return BadRequest();
+    }
+    
+    [HttpPost(ApiRoutes.User.CreateScanner)]
+    public async Task<IActionResult> RegisterScannerAsync([FromBody] CreatUserAdminRequest createScanner)
+    {
+        var response = await _service.RegisterScanner(createScanner);
+        if (response != null)
+        {
+            return Accepted(response);
+        }
+
+        return BadRequest();
+    }
+    
+    [HttpDelete(ApiRoutes.User.Delete)]
+    public async Task<IActionResult> DeleteUser(Guid id)
+    {
+        var response = await _service.DeleteUserASync(id);
+        if (response != null)
+        {
+            return Accepted(response);
         }
 
         return BadRequest();

@@ -1,12 +1,16 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using AuthService.Domain.Filters;
 using AutoMapper;
 using BaseService.Constants;
 using BaseService.DataContext;
+using BaseService.Services;
 using DAOLibrary.User;
 using DTOLibrary.Common;
+using DTOLibrary.Exceptions;
 using DTOLibrary.Helpers;
 using DTOLibrary.UserDto;
+using DTOLibrary.UserDto.AddOrganization;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminService.Services;
@@ -15,12 +19,14 @@ public class UserService : IUserService
 {
     private readonly DBContext _context;
     private readonly IMapper _mapper;
+    private readonly ICryptoService _cryptoService;
 
 
-    public UserService(DBContext context, IMapper mapper)
+    public UserService(DBContext context, IMapper mapper,ICryptoService cryptoService)
     {
         _context = context;
         _mapper = mapper;
+        _cryptoService = cryptoService;
     }
 
     public async Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter,
@@ -119,6 +125,43 @@ public class UserService : IUserService
         }
 
         return null;
+    }
+
+    public async Task<UserResponse> RegisterScanner(CreatUserAdminRequest createScanner)
+    {
+        var userExist = await GetUserByNationIdAsync(createScanner.NationalId);
+
+        if (userExist != null)
+        {
+            throw new BadHttpRequestException(CommonExceptions.NationalIdAlreadyRegistered.Message, 400);
+        }
+
+        var userDao = _mapper.Map<UserDao>(createScanner);
+        var (encryptedPassword, key, iv) = _cryptoService.Encrypt(createScanner.Password);
+        userDao.Password = encryptedPassword;
+        userDao.Key = key;
+        userDao.Iv = iv;
+        userDao.UserType = createScanner.UserType;
+
+        var entityEntry = await _context.Users.AddAsync(userDao);
+        var saveAsync = await _context.SaveChangesAsync();
+
+        var userResponse = _mapper.Map<UserResponse>(userDao);
+        return userResponse;
+    }
+
+    public async Task<UserResponse> DeleteUserASync(Guid id)
+    {
+        var exists = await _context.Users.AsNoTracking().FirstOrDefaultAsync(user=>user.Id == id);
+        if (exists == null)
+        {
+            return null;
+        }
+
+        var deleteUser =_context.Users.Remove(exists);
+        var save =await _context.SaveChangesAsync();
+        var response = _mapper.Map<UserResponse>(exists);
+        return response;
     }
 
 

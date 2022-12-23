@@ -94,8 +94,26 @@ public class PassLogService : IPassLogService
 
     public async Task<List<PassLogDao>> GetPassLogByScannerId(Guid ScannerId)
     {
-        var loglist = _context.PassLogs.Where(dao => dao.ScannerId == ScannerId).ToList();
+        var encryptPassLogList = _context.PassLogEncrypts.AsNoTracking().Where(dao => dao.ScannerId == ScannerId).ToList();
+        
+        List<PassLogDao> passLogDaos = new List<PassLogDao>();
 
-        return loglist;
+        foreach (var passLogEncryptDao in encryptPassLogList)
+        {
+           
+            passLogDaos.Add(
+                new PassLogDao()
+                {
+                    LogTime = passLogEncryptDao.LogTime,
+                    PassId = passLogEncryptDao.PassId,
+                    ScannerId = passLogEncryptDao.ScannerId,
+                    Date = passLogEncryptDao.Date,
+                    UserId = passLogEncryptDao.UserId,
+                    UserNatId = passLogEncryptDao.UserNatId
+                }
+            );
+        }
+        
+        return passLogDaos;
     }
 }

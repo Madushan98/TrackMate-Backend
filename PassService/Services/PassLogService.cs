@@ -31,11 +31,14 @@ public class PassLogService : IPassLogService
         var longitude = _cryptoService.EncryptLogData(createPassLogRequest.Longitude.ToString(), user.Key, user.Iv);
         var lattiutde = _cryptoService.EncryptLogData(createPassLogRequest.Latitude.ToString(), user.Key, user.Iv);
 
+        passLogEncryptDao.Latitude = lattiutde;
+        passLogEncryptDao.Longitude = longitude;
         passLogEncryptDao.UserNatId = user.NationalId;
         passLogEncryptDao.UserId = user.Id;
         passLogEncryptDao.ScannerId = createPassLogRequest.ScannerId;
         passLogEncryptDao.LogTime = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
         passLogEncryptDao.Date = DateTime.Now.ToString("MM/dd/yyyy");
+        passLogEncryptDao.PassId = createPassLogRequest.PassId;
 
         _context.PassLogEncrypts.Add(passLogEncryptDao);
         await _context.SaveChangesAsync();
@@ -46,22 +49,22 @@ public class PassLogService : IPassLogService
     public async Task<List<PassLogDao>> GetPassLogByPassId(Guid passId)
     {
         List<PassLogDao> passLogDaos = new List<PassLogDao>();
-        
+
         return passLogDaos;
     }
 
     public async Task<List<PassLogDao>> GetPassLogByUserId(Guid userId)
     {
-        var encryptPassLogList = _context.PassLogEncrypts.Where(dao => dao.UserId == userId);
-        var user = _context.Users.AsNoTracking().FirstOrDefault(user => user.Id == userId); 
+        var encryptPassLogList = _context.PassLogEncrypts.AsNoTracking().Where(dao => dao.UserId == userId).ToList();
+        var user = _context.Users.AsNoTracking().FirstOrDefault(user => user.Id == userId);
 
         List<PassLogDao> passLogDaos = new List<PassLogDao>();
-        
+
         foreach (var passLogEncryptDao in encryptPassLogList)
         {
-            var longitude = _cryptoService.EncryptLogData(passLogEncryptDao.Latitude, user.Key, user.Iv);
-            var lattiutde = _cryptoService.EncryptLogData(passLogEncryptDao.Longitude, user.Key, user.Iv);
-            
+            var longitude = _cryptoService.Decrypt(passLogEncryptDao.Latitude, user.Key, user.Iv);
+            var lattiutde = _cryptoService.Decrypt(passLogEncryptDao.Longitude, user.Key, user.Iv);
+
             passLogDaos.Add(
                 new PassLogDao()
                 {
@@ -74,10 +77,9 @@ public class PassLogService : IPassLogService
                     UserId = passLogEncryptDao.UserId,
                     UserNatId = passLogEncryptDao.UserNatId
                 }
-                );
-            
+            );
         }
-        
+
 
         return passLogDaos;
     }

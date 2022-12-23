@@ -52,4 +52,15 @@ public class UserService : IUserService
             Message = "Organization Details Is submitted",
         };
     }
+
+    public async Task<OrganizationResponse> GetUserOrganizationAsync(Guid userId)
+    {
+        var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == userId);
+        var organization = await _context.Organizations.AsNoTracking()
+            .FirstOrDefaultAsync(organization => organization.Id == user.OrganizationId);
+        
+        var response = _mapper.Map<OrganizationResponse>(organization);
+
+        return response;
+    }
 }

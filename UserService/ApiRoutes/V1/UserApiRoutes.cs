@@ -9,6 +9,7 @@ public class UserApiRoutes
     public static class User
     {
         public const string GetUserDetails = Base + "/user/" + UserId;
+        public const string GetUserOrganizations = Base + "/user-organizations/" + UserId ;
         public const string GetVaccinationDetails = Base + "/user/vaccination-details/" + UserId ;
         public const string UpdateVaccinationDetails = Base + "/user/vaccination-details"  ;
         public const string UpdateUserOrganization = Base + "/user/update-organization"  ;

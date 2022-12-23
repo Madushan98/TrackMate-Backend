@@ -2,6 +2,7 @@
 using DAOLibrary.Pass;
 using DTOLibrary.Common;
 using DTOLibrary.Helpers;
+using DTOLibrary.OrganizationDto;
 using DTOLibrary.PassDto;
 using DTOLibrary.UserDto.AddOrganization;
 using DTOLibrary.VaccinationDataDto;
@@ -31,6 +32,16 @@ public class UserController : Controller
 
         return Accepted(response);
     }
+    
+    [HttpGet(UserApiRoutes.User.GetUserOrganizations)]
+    [ProducesResponseType(typeof(OrganizationResponse), 200)]
+    public async Task<IActionResult> GetUserOrganization(Guid userId)
+    {
+        var response = await _service.GetUserOrganizationAsync(userId);
+
+        return Accepted(response);
+    }
+   
     
     [HttpGet(UserApiRoutes.User.GetUserDetails)]
     public async Task<IActionResult> Get(Guid userId)

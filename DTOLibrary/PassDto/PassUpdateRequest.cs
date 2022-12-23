@@ -11,8 +11,10 @@ public class PassUpdateRequest
     public string To { get; set; }
     public bool IsApproved { get; set; }
     public bool IsReoccurring { get; set; }
+    public string NationalId { get; set; }
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
+    public Guid UserId { get; set; }
     public List<PassData>? Data { get; set; } 
     
 }

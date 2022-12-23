@@ -106,7 +106,7 @@ public class PassController: Controller
     }
     
     [HttpPut(PassApiRoutes.Pass.Update)]
-    public async Task<IActionResult> UpdatePassByUserId(Guid id,[FromBody] CreatePassRequest request)
+    public async Task<IActionResult> UpdatePassByUserId(Guid id,[FromBody] PassUpdateRequest request)
     {
         var result =await _service.UpdatePassById(id,request);
         if (result == null)

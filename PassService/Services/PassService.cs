@@ -101,11 +101,29 @@ public class PassService : IPassServices
     public async Task<List<PassDao>> GetPassByUserId(Guid userId)
     {
         var passList = _context.Passes.Where(dao => dao.UserId == userId).ToList();
+        List<PassDao> expPasses = new List<PassDao>();
 
+        foreach (var passDao in passList)
+        {
+            if (passDao.EndDateTime < DateTime.Now)
+            {
+                expPasses.Add(passDao);
+            }
+        }
+
+        if (expPasses.Count >= 1)
+        {
+            _context.Passes.RemoveRange(expPasses.AsQueryable());
+            var save = await _context.SaveChangesAsync();
+            if (save>0)
+            {
+                passList = _context.Passes.Where(dao => dao.UserId == userId).ToList();
+            }
+        }
         return passList;
     }
 
-    public async Task<PassResponse> UpdatePassById(Guid id, CreatePassRequest request)
+    public async Task<PassResponse> UpdatePassById(Guid id, PassUpdateRequest request)
     {
         var exisit =await _context.Passes.AsNoTracking().FirstOrDefaultAsync(pass => pass.Id == id);
         if (exisit == null)

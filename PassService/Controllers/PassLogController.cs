@@ -24,8 +24,8 @@ public class PassLogController: Controller
     [HttpPost(PassApiRoutes.PassLog.Create)]
     public async Task<IActionResult> Create(CreatePassLogRequest createPassLogRequest)
     {
-        var result = _mapper.Map<PassLogDao>(createPassLogRequest); 
-        var response = await _service.SavePassLog(result);
+   
+        var response = await _service.SavePassLog(createPassLogRequest);
 
         return Accepted(response);
     }

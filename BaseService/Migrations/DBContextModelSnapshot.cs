@@ -260,6 +260,52 @@ namespace BaseService.Migrations
                     b.ToTable("PassLogs");
                 });
 
+            modelBuilder.Entity("DAOLibrary.Pass.PassLogEncryptDao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Latitude")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LogTime")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PassId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ScannerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserNatId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PassId");
+
+                    b.HasIndex("ScannerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PassLogEncrypts");
+                });
+
             modelBuilder.Entity("DAOLibrary.Pass.UserPassDao", b =>
                 {
                     b.Property<Guid>("Id")
@@ -491,6 +537,33 @@ namespace BaseService.Migrations
                 {
                     b.HasOne("DAOLibrary.Pass.PassDao", "Pass")
                         .WithMany("PassLogs")
+                        .HasForeignKey("PassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAOLibrary.User.UserDao", "Scanner")
+                        .WithMany()
+                        .HasForeignKey("ScannerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAOLibrary.User.UserDao", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pass");
+
+                    b.Navigation("Scanner");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DAOLibrary.Pass.PassLogEncryptDao", b =>
+                {
+                    b.HasOne("DAOLibrary.Pass.PassDao", "Pass")
+                        .WithMany()
                         .HasForeignKey("PassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

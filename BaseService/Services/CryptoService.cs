@@ -11,6 +11,15 @@ public class CryptoService : ICryptoService
         return new Tuple<string, string, string>(GetString(encrypted), GetString(aesInstance.Key),
             GetString(aesInstance.IV));
     }
+    
+    public string EncryptLogData(string value,string key , string iv)
+    {
+        byte[] Key = GetBytes(key);
+        byte[] Iv = GetBytes(iv);
+        using var aesInstance = Aes.Create();
+        var encrypted = EncryptStringToBytes(value, Key, Iv);
+        return GetString(encrypted);
+    }
 
     public string Decrypt(string value, string key, string iv)
     {

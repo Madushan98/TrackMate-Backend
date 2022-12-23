@@ -22,10 +22,11 @@ public class DBContext : DbContext
     
     public DbSet<PassDataMap> PassDataMaps { get; set; }
     public DbSet<PassLogDao> PassLogs { get; set; }
-    
     public DbSet<OrganizationDao> Organizations { get;set; }
     
     public DbSet<VaccinationDataDao> VaccinationDatas { get;set; }
+    
+    public DbSet<PassLogEncryptDao> PassLogEncrypts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

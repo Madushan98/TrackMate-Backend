@@ -6,7 +6,7 @@ namespace PassService.Services;
 
 public interface IPassLogService
 {
-    Task<PassLogDao> SavePassLog(PassLogDao passLogDao);
+    Task<PassLogEncryptDao> SavePassLog(CreatePassLogRequest createPassLogRequest);
     
     Task<List<PassLogDao>> GetPassLogByPassId(Guid passId);
 

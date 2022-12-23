@@ -3,6 +3,7 @@ using System;
 using BaseService.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BaseService.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20221222210916_passTitle")]
+    partial class passTitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,10 +247,6 @@ namespace BaseService.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("UserNatId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PassId");
@@ -258,52 +256,6 @@ namespace BaseService.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PassLogs");
-                });
-
-            modelBuilder.Entity("DAOLibrary.Pass.PassLogEncryptDao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Latitude")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LogTime")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Longitude")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("PassId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ScannerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("UserNatId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PassId");
-
-                    b.HasIndex("ScannerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PassLogEncrypts");
                 });
 
             modelBuilder.Entity("DAOLibrary.Pass.UserPassDao", b =>
@@ -537,33 +489,6 @@ namespace BaseService.Migrations
                 {
                     b.HasOne("DAOLibrary.Pass.PassDao", "Pass")
                         .WithMany("PassLogs")
-                        .HasForeignKey("PassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DAOLibrary.User.UserDao", "Scanner")
-                        .WithMany()
-                        .HasForeignKey("ScannerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DAOLibrary.User.UserDao", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pass");
-
-                    b.Navigation("Scanner");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DAOLibrary.Pass.PassLogEncryptDao", b =>
-                {
-                    b.HasOne("DAOLibrary.Pass.PassDao", "Pass")
-                        .WithMany()
                         .HasForeignKey("PassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -53,7 +53,7 @@ public class PassService : IPassServices
 
     public async Task<PassDao> CreatePass(PassDao pass)
     {
-        pass.GeneratedDateTime = DateTime.Now;
+
         _context.Passes.Add(pass);
         await _context.SaveChangesAsync();
         return pass;

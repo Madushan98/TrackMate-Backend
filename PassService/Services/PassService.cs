@@ -53,6 +53,7 @@ public class PassService : IPassServices
 
     public async Task<PassDao> CreatePass(PassDao pass)
     {
+        pass.GeneratedDateTime = DateTime.Now;
         _context.Passes.Add(pass);
         await _context.SaveChangesAsync();
         return pass;
@@ -115,17 +116,18 @@ public class PassService : IPassServices
         {
             _context.Passes.RemoveRange(expPasses.AsQueryable());
             var save = await _context.SaveChangesAsync();
-            if (save>0)
+            if (save > 0)
             {
                 passList = _context.Passes.Where(dao => dao.UserId == userId).ToList();
             }
         }
+
         return passList;
     }
 
     public async Task<PassResponse> UpdatePassById(Guid id, PassUpdateRequest request)
     {
-        var exisit =await _context.Passes.AsNoTracking().FirstOrDefaultAsync(pass => pass.Id == id);
+        var exisit = await _context.Passes.AsNoTracking().FirstOrDefaultAsync(pass => pass.Id == id);
         if (exisit == null)
         {
             return null;
@@ -133,11 +135,10 @@ public class PassService : IPassServices
 
         var dao = _mapper.Map<PassDao>(request);
         _context.Passes.Update(dao);
-        var saveAsyncChange =await _context.SaveChangesAsync();
+        var saveAsyncChange = await _context.SaveChangesAsync();
         if (saveAsyncChange > 0)
         {
-            var organizationById = await _context.Passes.AsNoTracking().
-                FirstOrDefaultAsync(pass => pass.Id == id);
+            var organizationById = await _context.Passes.AsNoTracking().FirstOrDefaultAsync(pass => pass.Id == id);
             return _mapper.Map<PassResponse>(organizationById);
         }
 

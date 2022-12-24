@@ -32,7 +32,7 @@ public class UserService : IUserService
     public async Task<PagedResponse<UserResponse>> GetAllUsersAsync(UserFilter filter,
         PaginationFilter pagination)
     {
-        var queryable = _context.Users.AsNoTracking();
+        var queryable = _context.Users.AsNoTracking().Where(dao=>dao.UserType == "Admin" || dao.UserType == "Scanner");
 
         queryable = AddFilterOnQuery(filter, queryable);
 

@@ -11,7 +11,7 @@ public interface IAuthService
     
     Task<LoginResponse> LoginUserAsync(LoginRequest loginRequest);
 
-    Task<OrganizationLoginResponse> RegisterOrganization(CreateOrganizationRequest organizationRequest);
+    Task<OrganizationResponse> RegisterOrganization(CreateOrganizationRequest organizationRequest);
     
     Task<OrganizationLoginResponse> LoginOrganization(LoginOrganizationRequest loginOrganizationRequest);
 }

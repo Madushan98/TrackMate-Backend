@@ -4,6 +4,7 @@ using AutoMapper;
 using DAOLibrary.User;
 using DTOLibrary.Common;
 using DTOLibrary.UserDto;
+using DTOLibrary.UserDto.AddOrganization;
 
 
 namespace BaseService.Contract.Mappers.User;
@@ -16,6 +17,8 @@ public class UserProfile : Profile
         CreateMap<PaginationRequest, PaginationFilter>().ReverseMap();
         CreateMap<GetAllUserQuery, UserFilter>().ReverseMap();
         CreateMap<UserDao, UserUpdateRequest>().ReverseMap();
+        CreateMap<UserDao, CreatUserAdminRequest>().ReverseMap();
+
 
     }
 }

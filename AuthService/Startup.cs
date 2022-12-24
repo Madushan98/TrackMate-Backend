@@ -78,12 +78,9 @@ namespace AuthService
             });
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseCors("CorsPolicy");
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

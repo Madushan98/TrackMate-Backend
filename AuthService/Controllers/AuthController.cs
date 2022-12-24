@@ -4,6 +4,7 @@ using AuthService.Services;
 using AutoMapper;
 using DTOLibrary.Exceptions;
 using DTOLibrary.OrganizationDto;
+using DTOLibrary.OrganizationDto.Login;
 using DTOLibrary.UserDto;
 using DTOLibrary.UserDto.Login;
 using Microsoft.AspNetCore.Mvc;
@@ -78,8 +79,18 @@ public class AuthController : Controller
     [ProducesResponseType(typeof(OrganizationResponse), 200)]
     public async Task<IActionResult> LoginOrganizationAsync([FromBody] LoginOrganizationRequest loginOrganizationRequest)
     {
-        var response = await _service.LoginOrganization(loginOrganizationRequest);
         
-        return Accepted(response);
+        OrganizationLoginResponse response = null;
+
+        try
+        {
+            response = await _service.LoginOrganization(loginOrganizationRequest);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e);
+        }
+        return Ok(response);
+        
     }
 }

@@ -10,6 +10,7 @@ public class ApiRoutes
     {
         public const string GetAll = Base + "/User";
         public const string Create = Base + "/User";
+        public const string CreateScanner = Base + "/Scaner/";
         public const string Get = Base + "/User/" + UserId;
         public const string Update = Base + "/User/" + UserId;
         public const string Delete = Base + "/User/" + UserId;

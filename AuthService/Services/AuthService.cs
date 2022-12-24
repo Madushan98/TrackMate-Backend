@@ -66,7 +66,7 @@ public class AuthService : IAuthService
             userResponse);
     }
     
-    public async Task<OrganizationLoginResponse> RegisterOrganization(CreateOrganizationRequest organizationRequest)
+    public async Task<OrganizationResponse> RegisterOrganization(CreateOrganizationRequest organizationRequest)
     {
         
         bool checkExists = await IsOrganizationExists(organizationRequest);
@@ -84,27 +84,23 @@ public class AuthService : IAuthService
         var organization = await _context.Organizations.AddAsync(organizationDao);
         var organizationResponse = _mapper.Map<OrganizationResponse>(organizationDao);
         var saveAsync = await _context.SaveChangesAsync();
-        var refreshToken = Guid.NewGuid().ToString();
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, organizationDao.EmailAddress),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("UserId", organization.Entity.Id.ToString()),
-            new Claim("Username", organizationDao.EmailAddress),
-            new Claim("Permission", string.Join(",", new List<int>())),
-            new Claim("UserType",organizationDao.UserType )
-        };
-        return _tokenService.GenerateOrganizationAuthenticationResult(organization.Entity.Id.ToString(), claims,
-            refreshToken, organizationResponse);
+        return organizationResponse;
     }
 
     public async Task<OrganizationLoginResponse> LoginOrganization(LoginOrganizationRequest loginOrganizationRequest)
     {
         var organization = await _context.Organizations.FirstOrDefaultAsync(x => x.EmailAddress == loginOrganizationRequest.EmailAddress);
+        
         if (organization == null)
         {
-            throw new ValidationException("Organization is not registered");
+            throw new BadHttpRequestException("Wrong Credentials", 400);
         }
+
+        if (organization.IsApproved == false)
+        {
+            throw new BadHttpRequestException("Your Account not verified yet");
+        }
+
         var decryptedPassword = _cryptoService.Decrypt(organization.Password, organization.Key, organization.Iv);
         if (decryptedPassword != loginOrganizationRequest.Password)
         {

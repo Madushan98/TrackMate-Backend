@@ -57,14 +57,12 @@ So, the purpose of this project is to generate a pass that is unique to each ins
 
 ### Mobile app 
 
-<p float="left">
-  <img style="padding=20" src="https://user-images.githubusercontent.com/65262773/227772353-8ee1df1b-1c4a-4cd3-b224-d44f17815ddf.png" width="100" />
-  <img src="https://user-images.githubusercontent.com/65262773/227772364-7e0c5d21-9473-43c0-b33c-a4d04a1c847d.png" width="100" /> 
-  <img src="https://user-images.githubusercontent.com/65262773/227772367-09696f40-51c0-4d8c-8402-01a7352d7050.png" width="100" />
-  <img src="https://user-images.githubusercontent.com/65262773/227772559-1dd9b3d2-425f-43a6-9bc7-c80f9e36b653.png" width="100" />
-</p>
 
 
+![Screenshot_1671650496](https://user-images.githubusercontent.com/65262773/227772353-8ee1df1b-1c4a-4cd3-b224-d44f17815ddf.png)
+![Screenshot_1671650500](https://user-images.githubusercontent.com/65262773/227772364-7e0c5d21-9473-43c0-b33c-a4d04a1c847d.png)
+![Screenshot_1671650550](https://user-images.githubusercontent.com/65262773/227772367-09696f40-51c0-4d8c-8402-01a7352d7050.png)
+![Screenshot_1671650564](https://user-images.githubusercontent.com/65262773/227772559-1dd9b3d2-425f-43a6-9bc7-c80f9e36b653.png)
 
 
 ## Roadmap ##

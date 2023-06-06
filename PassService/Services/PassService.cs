@@ -54,6 +54,7 @@ public class PassService : IPassServices
     public async Task<PassDao> CreatePass(PassDao pass)
     {
 
+
         _context.Passes.Add(pass);
         await _context.SaveChangesAsync();
         return pass;

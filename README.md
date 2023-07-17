@@ -45,6 +45,14 @@ Travelling in the lock-down period either for employment (private sector), essen
 
 So, the purpose of this project is to generate a pass that is unique to each institution and the person who is carrying it. This project consists of an interface for the user to request the Pass, then the request can be administered at different positions in the institution, where finally the Pass will be generated. The generated Pass upon approval is conveyed to a central database and users can use the pass through the QR code generated. Then the authorities such as police or security officers can use the mobile app to scan the QR code and verify the pass instantly. Additionally, the travelling history of the pass will be tracked through the scanning points which will be very useful for the scenarios such as Covid cluster identification.
 
+### Mobile Application Git Reository - https://github.com/Madushan98/TrackMate-mobile
+### Frontend Application Git Repository - https://github.com/PREMINDA/software_project_frontend
+
+## System Architecture
+
+![Screenshot 2023-07-17 121639](https://github.com/Madushan98/TrackMate-Backend/assets/65262773/ef7b8a1f-d2e2-483b-ac52-fe0b8c5edce7)
+
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
